@@ -1,9 +1,8 @@
 # .NET Developer
 
-**Phone:** [+971529457731](https://wa.me/971529457731)  
-**Email:** [minkaungkhant.k2@gmail.com](mailto:minkaungkhant.k2@gmail.com)  
-**LinkedIn:** [LinkedIn Profile](https://www.linkedin.com/in/min-kaung-khant/)  
-**Portfolio:** [Portfolio](http://minkaungkhant.github.io)  
+**Phone:** [+971529457731](https://wa.me/971529457731)
+**Email:** [minkaungkhant.k2@gmail.com](mailto:minkaungkhant.k2@gmail.com)
+**LinkedIn:** [LinkedIn Profile](https://www.linkedin.com/in/min-kaung-khant/)
 **Location:** Dubai, UAE  
 
 ---
