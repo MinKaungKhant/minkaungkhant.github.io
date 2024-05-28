@@ -2,7 +2,7 @@
 
 **Phone:** [+971529457731](https://wa.me/971529457731)
 **Email:** [minkaungkhant.k2@gmail.com](mailto:minkaungkhant.k2@gmail.com)
-**LinkedIn:** [LinkedIn Profile](https://www.linkedin.com/in/min-kaung-khant/)
+**LinkedIn:** [LinkedIn](https://www.linkedin.com/in/min-kaung-khant/)
 **Location:** Dubai, UAE  
 
 ---
@@ -92,13 +92,7 @@ Innovative .NET Developer with over 8 years of experience in software developmen
 ## Highlighted Projects
 
 - **Square** | Teromac Technologies: Developed TWG system with Square API.
-- **123 Payment** | 2C2P: Managed and optimized the 123 payment service.
-- **Easy2Send + EasyWallet** | 2C2P: Developed the Admin Portal and integrated GCash.
-- **TATSUMI Marine System** | SourceCode: Developed a marine system for cargo management.
+- **[123 Payment](https://2c2p.com/accept-payments)** | 2C2P: Managed and optimized the 123 payment service.
+- **[Easy2Send](https://go.2c2p.com/easy2send/) + [EasyWallet](https://easy2send.2c2p.com/easyWallet)** | 2C2P: Developed the Admin Portal and integrated GCash.
+- **[TATSUMI Marine System](http://www.tatsumisingapore.com/)** | SourceCode: Developed a marine system for cargo management.
 - **Retail Management System** | ACE Data System: Developed retail business and POS using C#.
-
----
-
-## References
-
-Available upon request.
