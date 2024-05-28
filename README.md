@@ -30,14 +30,14 @@ Innovative .NET Developer with over 8 years of experience in software developmen
 ## Professional Experience
 
 ### .NET Developer
-**Teromac Technologies Inc, New York**  
+**[Teromac Technologies Inc](https://teromac.com/), New York**  
 *October 2023 - Present*
 - Developed and managed data collection using Square APIs.
 - Generated various reports for TWG systems utilizing .NET 6, Windows Services, Batch Scripting, MSSQL, SFTP, and AWS EC2.
 - **Technologies Used:** .NET 6, Windows Services, Batch Scripting, Microsoft SQL Server, SFTP, AWS EC2
 
 ### .NET Developer
-**2C2P, Yangon**  
+**[2C2P](https://2c2p.com/), Yangon**  
 *March 2022 - September 2023*
 - Oversaw the 123 payment service and its integration with Hello Clever - Australia.
 - Led the development and maintenance of the Easy2Send Admin Portal.
@@ -47,7 +47,7 @@ Innovative .NET Developer with over 8 years of experience in software developmen
 - **Technologies Used:** .NET 6, .NET 5, .NET Core, Microsoft SQL Server, MySQL, AWS EC2, AWS S3, CloudWatch, Blackduck, SonarQube, Jenkins, RESTful API
 
 ### Senior Application Developer
-**SourceCode Co., Ltd, Yangon**  
+**[SourceCode Co., Ltd](https://www.sourcecode.com.mm/), Yangon**  
 *February 2020 - February 2022*
 - Developed a comprehensive marine system for the TATSUMI Marine System project.
 - Created the Myanmar Power Spectrum system for meter reading and billing.
@@ -56,14 +56,14 @@ Innovative .NET Developer with over 8 years of experience in software developmen
 - **Technologies Used:** Flutter, SQLite, .NET Framework, MSSQL, MySQL, RESTful API
 
 ### Senior Developer
-**SystemEXE Myanmar Co., Ltd, Yangon**  
+**[SystemEXE Myanmar Co., Ltd](https://www.system-exe.co.jp/), Yangon**  
 *August 2019 - February 2020*
 - Managed the Workflow Compass Project with MVC 5 and .NET Core.
 - Led the ERP system development to enhance business operations.
 - **Technologies Used:** MVC 5, .NET Core, PostgreSQL, Reporting
 
 ### Software Engineer
-**ACE Data Systems Co., Ltd, Yangon**  
+**[ACE Data Systems Co., Ltd](https://acedatasystems.com/), Yangon**  
 *December 2014 - May 2018*
 - Contributed to the evolution of the Retail Management System.
 - Developed Distribution Management System and Gold & Jewel System.
@@ -71,7 +71,7 @@ Innovative .NET Developer with over 8 years of experience in software developmen
 - **Technologies Used:** C#, .NET Framework, MSSQL, Visual Basic
 
 ### Junior Developer
-**ACE Data Systems Co., Ltd, Yangon**  
+**[ACE Data Systems Co., Ltd](https://acedatasystems.com/), Yangon**  
 *March 2014 - November 2014*
 - Contributed to the Myanma Timber Enterprise project with ASP.NET and MSSQL.
 - **Technologies Used:** ASP.NET, Microsoft SQL Server
