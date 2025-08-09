@@ -7,6 +7,44 @@ function initializePortfolio() {
     // Initialize EmailJS first
     initEmailJS();
     
+    // Add a global test function regardless of EmailJS status
+    window.testEmailJS = function() {
+        console.log('Testing EmailJS...');
+        console.log('emailjs available:', typeof emailjs);
+        console.log('EMAIL_CONFIG:', window.EMAIL_CONFIG);
+        
+        if (typeof emailjs === 'undefined') {
+            alert('EmailJS library not loaded!');
+            return;
+        }
+        
+        if (!window.EMAIL_CONFIG) {
+            alert('EMAIL_CONFIG not found!');
+            return;
+        }
+        
+        const testParams = {
+            from_name: "Test User",
+            from_email: "test@example.com",
+            subject: "Test Email",
+            message: "This is a test message from the portfolio contact form."
+        };
+        
+        console.log('Sending test email with params:', testParams);
+        
+        // Use the direct approach with hardcoded values
+        emailjs.send('service_y6aydpo', 'template_nakxnuh', testParams, 'prjIZlyUwDG8noyXF')
+        .then(function(response) {
+            console.log('TEST SUCCESS!', response.status, response.text);
+            alert('Test email sent successfully! Check your Gmail.');
+        }, function(error) {
+            console.log('TEST FAILED...', error);
+            alert('Test email failed: ' + JSON.stringify(error));
+        });
+    };
+    
+    console.log('Test function created. Type window.testEmailJS() to test.');
+    
     // Initialize all components
     initNavigation();
     initScrollAnimations();
@@ -20,11 +58,21 @@ function initializePortfolio() {
 
 // Initialize EmailJS
 function initEmailJS() {
-    if (typeof emailjs !== 'undefined' && window.EMAIL_CONFIG) {
-        emailjs.init(window.EMAIL_CONFIG.PUBLIC_KEY);
-        console.log('EmailJS initialized with public key:', window.EMAIL_CONFIG.PUBLIC_KEY);
+    console.log('Initializing EmailJS...');
+    console.log('emailjs type:', typeof emailjs);
+    console.log('EMAIL_CONFIG:', window.EMAIL_CONFIG);
+    
+    if (typeof emailjs !== 'undefined') {
+        if (window.EMAIL_CONFIG && window.EMAIL_CONFIG.PUBLIC_KEY) {
+            emailjs.init(window.EMAIL_CONFIG.PUBLIC_KEY);
+            console.log('✅ EmailJS initialized with public key:', window.EMAIL_CONFIG.PUBLIC_KEY);
+        } else {
+            // Fallback: initialize with hardcoded key
+            emailjs.init('prjIZlyUwDG8noyXF');
+            console.log('✅ EmailJS initialized with hardcoded key');
+        }
     } else {
-        console.log('EmailJS not available or EMAIL_CONFIG not found');
+        console.log('❌ EmailJS library not available');
     }
 }
 
@@ -203,22 +251,21 @@ function initContactForm() {
 
 // Send email using EmailJS
 function sendEmailViaEmailJS(data, submitBtn, originalText, form) {
-    // Prepare template parameters
+    // Use the simplest possible template parameters
     const templateParams = {
         from_name: data.name,
         from_email: data.email,
         subject: data.subject,
-        message: data.message,
-        to_email: 'minkaungkhant.k2@gmail.com',
-        reply_to: data.email
+        message: data.message
     };
     
-    // Send email
-    emailjs.send(
-        window.EMAIL_CONFIG.SERVICE_ID,
-        window.EMAIL_CONFIG.TEMPLATE_ID,
-        templateParams
-    ).then(function(response) {
+    console.log('Sending email with params:', templateParams);
+    console.log('Using Service ID:', window.EMAIL_CONFIG.SERVICE_ID);
+    console.log('Using Template ID:', window.EMAIL_CONFIG.TEMPLATE_ID);
+    
+    // Use emailjs.send directly with your exact credentials
+    emailjs.send('service_y6aydpo', 'template_nakxnuh', templateParams, 'prjIZlyUwDG8noyXF')
+    .then(function(response) {
         console.log('SUCCESS!', response.status, response.text);
         showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
         form.reset();
@@ -226,7 +273,8 @@ function sendEmailViaEmailJS(data, submitBtn, originalText, form) {
         submitBtn.disabled = false;
     }, function(error) {
         console.log('FAILED...', error);
-        showNotification('Failed to send message. Please try again or contact me directly.', 'error');
+        console.log('Error details:', JSON.stringify(error));
+        showNotification('Failed to send message. Error: ' + (error.text || error.message || 'Unknown error'), 'error');
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
     });
