@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializePortfolio() {
+    // Initialize EmailJS first
+    initEmailJS();
+    
     // Initialize all components
     initNavigation();
     initScrollAnimations();
@@ -13,6 +16,16 @@ function initializePortfolio() {
     initTypingAnimation();
     initParticleBackground();
     initScrollIndicator();
+}
+
+// Initialize EmailJS
+function initEmailJS() {
+    if (typeof emailjs !== 'undefined' && window.EMAIL_CONFIG) {
+        emailjs.init(window.EMAIL_CONFIG.PUBLIC_KEY);
+        console.log('EmailJS initialized with public key:', window.EMAIL_CONFIG.PUBLIC_KEY);
+    } else {
+        console.log('EmailJS not available or EMAIL_CONFIG not found');
+    }
 }
 
 // Navigation functionality
@@ -159,13 +172,63 @@ function initContactForm() {
         submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;
         
-        // Simulate form submission (replace with actual endpoint)
-        setTimeout(() => {
-            showNotification('Message sent successfully!', 'success');
-            form.reset();
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }, 2000);
+        // Check if EmailJS is configured
+        console.log('EMAIL_CONFIG:', window.EMAIL_CONFIG);
+        console.log('emailjs available:', typeof emailjs);
+        
+        if (window.EMAIL_CONFIG && window.EMAIL_CONFIG.PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+            // Send email using EmailJS (should already be initialized)
+            if (typeof emailjs !== 'undefined') {
+                console.log('Sending email via EmailJS');
+                sendEmailViaEmailJS(data, submitBtn, originalText, form);
+            } else {
+                // EmailJS library not loaded
+                setTimeout(() => {
+                    showNotification('Error: EmailJS library not loaded. Please refresh the page.', 'error');
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 1000);
+            }
+        } else {
+            // Fallback: Demo mode with simulation
+            setTimeout(() => {
+                showNotification('Demo Mode: EmailJS not configured. Please set up your EmailJS credentials.', 'info');
+                form.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        }
+    });
+}
+
+// Send email using EmailJS
+function sendEmailViaEmailJS(data, submitBtn, originalText, form) {
+    // Prepare template parameters
+    const templateParams = {
+        from_name: data.name,
+        from_email: data.email,
+        subject: data.subject,
+        message: data.message,
+        to_email: 'minkaungkhant.k2@gmail.com',
+        reply_to: data.email
+    };
+    
+    // Send email
+    emailjs.send(
+        window.EMAIL_CONFIG.SERVICE_ID,
+        window.EMAIL_CONFIG.TEMPLATE_ID,
+        templateParams
+    ).then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+        showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+        form.reset();
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }, function(error) {
+        console.log('FAILED...', error);
+        showNotification('Failed to send message. Please try again or contact me directly.', 'error');
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
     });
 }
 
