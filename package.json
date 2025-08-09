@@ -1,0 +1,38 @@
+{
+  "name": "senior-dotnet-developer-portfolio",
+  "version": "1.0.0",
+  "description": "Premium dark mode portfolio for Senior .NET Developer with Apple-inspired design",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000 || npx serve .",
+    "serve": "npx serve .",
+    "build": "echo 'No build process needed for static site'",
+    "validate": "npx html-validate index.html",
+    "optimize": "npx imagemin images/* --out-dir=images/optimized"
+  },
+  "keywords": [
+    "portfolio",
+    "dotnet",
+    "developer",
+    "dark-theme",
+    "responsive",
+    "portfolio-website",
+    "senior-developer"
+  ],
+  "author": "Min Kaung Khant",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MinKaungKhant/Portfolio.git"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0",
+    "html-validate": "^8.0.0",
+    "imagemin": "^8.0.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
