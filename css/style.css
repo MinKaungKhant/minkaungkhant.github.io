@@ -163,6 +163,7 @@ p {
     position: relative;
     background: radial-gradient(ellipse at center, rgba(102, 126, 234, 0.1) 0%, rgba(10, 10, 10, 1) 70%);
     overflow: hidden;
+    contain: layout style paint;
 }
 
 .hero-container {
@@ -933,8 +934,58 @@ section {
     }
 }
 
+/* Mobile/Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* This targets touch devices specifically */
+    .hero-text,
+    .hero-greeting,
+    .hero-name,
+    .hero-role,
+    .hero-description,
+    .hero-buttons,
+    .hero-image {
+        animation-duration: 0.6s !important;
+        will-change: auto;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(8px) translateZ(0);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) translateZ(0);
+        }
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Mobile animation performance fixes */
+    .hero-text,
+    .hero-greeting,
+    .hero-name,
+    .hero-role,
+    .hero-description,
+    .hero-buttons,
+    .hero-image {
+        transform: translateZ(0);
+        will-change: auto;
+    }
+    
+    /* Reduce animation movement for mobile */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(10px) translateZ(0);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) translateZ(0);
+        }
+    }
+
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -960,6 +1011,13 @@ section {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 40px;
+        min-height: auto;
+    }
+    
+    .hero {
+        min-height: 100vh;
+        padding: 80px 0;
+        overflow: hidden;
     }
 
     .hero-buttons {
@@ -1013,6 +1071,34 @@ section {
 }
 
 @media (max-width: 480px) {
+    /* Disable complex animations on very small screens for better performance */
+    .hero-text,
+    .hero-greeting,
+    .hero-name,
+    .hero-role,
+    .hero-description,
+    .hero-buttons,
+    .hero-image {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        will-change: auto;
+    }
+    
+    /* Simple fade-in alternative for mobile */
+    .hero-text {
+        animation: simpleFadeIn 0.8s ease-out both;
+    }
+    
+    @keyframes simpleFadeIn {
+        from { 
+            opacity: 0; 
+        }
+        to { 
+            opacity: 1; 
+        }
+    }
+
     .container {
         padding: 0 15px;
     }
