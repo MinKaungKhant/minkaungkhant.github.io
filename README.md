@@ -2,6 +2,10 @@
 
 A modern, responsive portfolio website designed specifically for Senior .NET Developers. Features a dark theme with smooth animations and an Apple-inspired single-scroll design.
 
+## 🌐 Live Demo
+
+**Portfolio URL**: [https://minkaungkhant.github.io/Portfolio/](https://minkaungkhant.github.io/Portfolio/)
+
 ## 🚀 Features
 
 - **Dark Mode Design**: Premium dark theme with gradient accents
@@ -158,11 +162,23 @@ The contact form includes:
 
 ## 🚀 Deployment
 
-You can deploy this portfolio to:
-- **GitHub Pages**: Free hosting for static sites
+### GitHub Pages (Current Deployment)
+This portfolio is automatically deployed to GitHub Pages via GitHub Actions:
+- **Live URL**: [https://minkaungkhant.github.io/Portfolio/](https://minkaungkhant.github.io/Portfolio/)
+- **Auto-deployment**: Triggers on every push to the main branch
+- **Custom Domain**: Can be configured in repository settings
+
+### Alternative Deployment Options
 - **Netlify**: Easy deployment with form handling
 - **Vercel**: Fast static site hosting
 - **Traditional web hosting**: Upload files via FTP
+
+### Manual GitHub Pages Setup
+1. Go to your repository settings
+2. Navigate to "Pages" section
+3. Select "Deploy from a branch"
+4. Choose "main" branch and "/ (root)" folder
+5. Save and wait for deployment
 
 ## 📄 License
 
