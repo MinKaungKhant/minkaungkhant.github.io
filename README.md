@@ -4,7 +4,7 @@ A modern, responsive portfolio website designed specifically for Senior .NET Dev
 
 ## 🌐 Live Demo
 
-**Portfolio URL**: [https://minkaungkhant.github.io/Portfolio/](https://minkaungkhant.github.io/Portfolio/)
+**Portfolio URL**: [https://minkaungkhant.github.io/](https://minkaungkhant.github.io/)
 
 ## 🚀 Features
 
@@ -164,7 +164,7 @@ The contact form includes:
 
 ### GitHub Pages (Current Deployment)
 This portfolio is automatically deployed to GitHub Pages via GitHub Actions:
-- **Live URL**: [https://minkaungkhant.github.io/Portfolio/](https://minkaungkhant.github.io/Portfolio/)
+- **Live URL**: [https://minkaungkhant.github.io/](https://minkaungkhant.github.io/)
 - **Auto-deployment**: Triggers on every push to the main branch
 - **Custom Domain**: Can be configured in repository settings
 
