@@ -100,16 +100,13 @@ function initNavigation() {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
         document.body.classList.remove('menu-open');
-        hamburger.setAttribute('aria-expanded', 'false');
     }
 
     // Helper function to toggle mobile menu
     function toggleMobileMenu() {
-        const isOpen = hamburger.classList.contains('active');
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
         document.body.classList.toggle('menu-open');
-        hamburger.setAttribute('aria-expanded', !isOpen);
     }
 
     // Navbar scroll effect
