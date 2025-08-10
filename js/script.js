@@ -3,54 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePortfolio();
 });
 
-// Utility function for development logging
-function debugLog(...args) {
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        console.log(...args);
-    }
-}
-
 function initializePortfolio() {
     // Initialize EmailJS first
     initEmailJS();
-    
-    // Add a global test function for development
-    window.testEmailJS = function() {
-        debugLog('Testing EmailJS...');
-        debugLog('emailjs available:', typeof emailjs);
-        debugLog('EMAIL_CONFIG:', window.EMAIL_CONFIG);
-        
-        if (typeof emailjs === 'undefined') {
-            alert('EmailJS library not loaded!');
-            return;
-        }
-        
-        if (!window.EMAIL_CONFIG) {
-            alert('EMAIL_CONFIG not found!');
-            return;
-        }
-        
-        const testParams = {
-            from_name: "Test User",
-            from_email: "test@example.com",
-            subject: "Test Email",
-            message: "This is a test message from the portfolio contact form."
-        };
-        
-        debugLog('Sending test email with params:', testParams);
-        
-        // Use the direct approach with hardcoded values
-        emailjs.send('service_y6aydpo', 'template_nakxnuh', testParams, 'prjIZlyUwDG8noyXF')
-        .then(function(response) {
-            debugLog('TEST SUCCESS!', response.status, response.text);
-            alert('Test email sent successfully! Check your Gmail.');
-        }, function(error) {
-            debugLog('TEST FAILED...', error);
-            alert('Test email failed: ' + JSON.stringify(error));
-        });
-    };
-    
-    debugLog('Test function created. Type window.testEmailJS() to test.');
     
     // Initialize all components
     initNavigation();
@@ -65,21 +20,8 @@ function initializePortfolio() {
 
 // Initialize EmailJS
 function initEmailJS() {
-    debugLog('Initializing EmailJS...');
-    debugLog('emailjs type:', typeof emailjs);
-    debugLog('EMAIL_CONFIG:', window.EMAIL_CONFIG);
-    
-    if (typeof emailjs !== 'undefined') {
-        if (window.EMAIL_CONFIG && window.EMAIL_CONFIG.PUBLIC_KEY) {
-            emailjs.init(window.EMAIL_CONFIG.PUBLIC_KEY);
-            debugLog('✅ EmailJS initialized with public key:', window.EMAIL_CONFIG.PUBLIC_KEY);
-        } else {
-            // Fallback: initialize with hardcoded key
-            emailjs.init('prjIZlyUwDG8noyXF');
-            debugLog('✅ EmailJS initialized with hardcoded key');
-        }
-    } else {
-        debugLog('❌ EmailJS library not available');
+    if (typeof emailjs !== 'undefined' && window.EMAIL_CONFIG && window.EMAIL_CONFIG.PUBLIC_KEY) {
+        emailjs.init(window.EMAIL_CONFIG.PUBLIC_KEY);
     }
 }
 
@@ -93,6 +35,12 @@ function initNavigation() {
     if (!hamburger || !navMenu) {
         console.error('Hamburger menu elements not found!');
         return;
+    }
+
+    function updateARIA() {
+        const isExpanded = hamburger.classList.contains('active');
+        hamburger.setAttribute('aria-expanded', isExpanded);
+        navMenu.setAttribute('aria-hidden', !isExpanded);
     }
 
     // Helper function to close mobile menu
@@ -123,6 +71,7 @@ function initNavigation() {
         e.preventDefault();
         e.stopPropagation();
         toggleMobileMenu();
+        updateARIA();
     });
 
     // Close mobile menu when clicking on nav links

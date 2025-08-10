@@ -147,10 +147,11 @@ p {
 .hamburger {
     display: none;
     flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
     cursor: pointer;
-    padding: 10px;
-    margin: -10px;
-    transition: all 0.3s ease;
+    padding: 0;
     background: none;
     border: none;
     outline: none;
@@ -159,33 +160,35 @@ p {
 }
 
 .hamburger:hover {
-    transform: scale(1.1);
+    opacity: 0.8;
 }
 
-.hamburger:focus {
+.hamburger:focus-visible {
     outline: 2px solid #667eea;
-    outline-offset: 2px;
+    outline-offset: 5px;
+    border-radius: 4px;
 }
 
 .hamburger span {
-    width: 25px;
+    width: 100%;
     height: 3px;
     background: #ffffff;
-    margin: 3px 0;
-    transition: 0.3s;
-    border-radius: 2px;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+    transform-origin: left center;
 }
 
 .hamburger.active span:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
+    transform: rotate(45deg) translate(1px, -2px);
 }
 
 .hamburger.active span:nth-child(2) {
     opacity: 0;
+    transform: translateX(-20px);
 }
 
 .hamburger.active span:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
+    transform: rotate(-45deg) translate(1px, 1px);
 }
 
 /* Hero Section */
