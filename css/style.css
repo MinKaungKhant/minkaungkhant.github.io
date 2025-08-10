@@ -267,6 +267,10 @@ p {
 
 .hero-title {
     margin-bottom: 30px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .hero-greeting {
@@ -278,6 +282,11 @@ p {
     animation: fadeInUp 1s ease-out 0.2s both;
     will-change: transform, opacity;
     backface-visibility: hidden;
+    min-height: 40px;
+    line-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .hero-name {
@@ -292,6 +301,11 @@ p {
     animation: fadeInUp 1s ease-out 0.4s both;
     will-change: transform, opacity;
     backface-visibility: hidden;
+    min-height: 80px;
+    line-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .hero-role {
@@ -302,6 +316,11 @@ p {
     animation: fadeInUp 1s ease-out 0.6s both;
     will-change: transform, opacity;
     backface-visibility: hidden;
+    min-height: 50px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .hero-description {
@@ -312,6 +331,10 @@ p {
     animation: fadeInUp 1s ease-out 0.8s both;
     will-change: transform, opacity;
     backface-visibility: hidden;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .hero-buttons {
@@ -320,6 +343,9 @@ p {
     animation: fadeInUp 1s ease-out 1s both;
     will-change: transform, opacity;
     backface-visibility: hidden;
+    min-height: 60px;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .hero-image {
@@ -1272,6 +1298,7 @@ section {
     .hero-greeting {
         height: 40px;
         line-height: 40px;
+        justify-content: center;
     }
     
     .hero-name {
@@ -1285,6 +1312,7 @@ section {
     .hero-role {
         height: 50px;
         line-height: 50px;
+        justify-content: center;
     }
     
     .hero-description {
@@ -1292,12 +1320,14 @@ section {
         display: flex;
         align-items: center;
         justify-content: center;
+        text-align: center;
     }
     
     .hero-buttons {
         min-height: 60px;
         display: flex;
         align-items: center;
+        justify-content: center;
     }
 
     .hero-buttons {
