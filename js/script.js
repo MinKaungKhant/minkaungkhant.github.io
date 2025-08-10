@@ -3,23 +3,36 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePortfolio();
 });
 
+// Fallback for older browsers or if DOMContentLoaded already fired
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializePortfolio);
+} else {
+    // DOM is already loaded
+    initializePortfolio();
+}
+
+// Additional fallback for window load event
+window.addEventListener('load', function() {
+    // Only reinitialize navigation if hamburger doesn't work
+    const hamburger = document.querySelector('.hamburger');
+    if (hamburger && !hamburger.onclick && !hamburger.hasAttribute('data-initialized')) {
+        console.log('Reinitializing navigation...');
+        initNavigation();
+    }
+});
+
 function initializePortfolio() {
+    console.log('Initializing Portfolio...');
+    
     // Initialize EmailJS first
     initEmailJS();
     
-    // Add a global test function regardless of EmailJS status
+    // Add a global test function for EmailJS testing (development only)
     window.testEmailJS = function() {
         console.log('Testing EmailJS...');
-        console.log('emailjs available:', typeof emailjs);
-        console.log('EMAIL_CONFIG:', window.EMAIL_CONFIG);
         
         if (typeof emailjs === 'undefined') {
             alert('EmailJS library not loaded!');
-            return;
-        }
-        
-        if (!window.EMAIL_CONFIG) {
-            alert('EMAIL_CONFIG not found!');
             return;
         }
         
@@ -30,9 +43,8 @@ function initializePortfolio() {
             message: "This is a test message from the portfolio contact form."
         };
         
-        console.log('Sending test email with params:', testParams);
+        console.log('Sending test email...');
         
-        // Use the direct approach with hardcoded values
         emailjs.send('service_y6aydpo', 'template_nakxnuh', testParams, 'prjIZlyUwDG8noyXF')
         .then(function(response) {
             console.log('TEST SUCCESS!', response.status, response.text);
@@ -43,36 +55,37 @@ function initializePortfolio() {
         });
     };
     
-    console.log('Test function created. Type window.testEmailJS() to test.');
+    console.log('Test function available: window.testEmailJS()');
     
-    // Initialize all components
-    initNavigation();
-    initScrollAnimations();
-    initSkillBars();
-    initContactForm();
-    initSmoothScrolling();
-    initTypingAnimation();
-    initParticleBackground();
-    initScrollIndicator();
-    initProjectFilters();
-    initSkillAnimations();
-    initCTAScroll();
+    // Initialize all components with small delays to ensure DOM is ready
+    setTimeout(() => {
+        initNavigation();
+        initScrollAnimations();
+        initSkillBars();
+        initContactForm();
+        initSmoothScrolling();
+        initTypingAnimation();
+        initParticleBackground();
+        initScrollIndicator();
+        initProjectFilters();
+        initSkillAnimations();
+        initCTAScroll();
+        console.log('Portfolio initialization complete!');
+    }, 50);
 }
 
 // Initialize EmailJS
 function initEmailJS() {
     console.log('Initializing EmailJS...');
-    console.log('emailjs type:', typeof emailjs);
-    console.log('EMAIL_CONFIG:', window.EMAIL_CONFIG);
     
     if (typeof emailjs !== 'undefined') {
         if (window.EMAIL_CONFIG && window.EMAIL_CONFIG.PUBLIC_KEY) {
             emailjs.init(window.EMAIL_CONFIG.PUBLIC_KEY);
-            console.log('✅ EmailJS initialized with public key:', window.EMAIL_CONFIG.PUBLIC_KEY);
+            console.log('✅ EmailJS initialized successfully');
         } else {
             // Fallback: initialize with hardcoded key
             emailjs.init('prjIZlyUwDG8noyXF');
-            console.log('✅ EmailJS initialized with hardcoded key');
+            console.log('✅ EmailJS initialized with fallback key');
         }
     } else {
         console.log('❌ EmailJS library not available');
@@ -86,43 +99,60 @@ function initNavigation() {
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
 
+    // Check if required elements exist
+    if (!navbar || !hamburger || !navMenu) {
+        console.warn('Navigation elements not found, retrying...');
+        setTimeout(initNavigation, 100);
+        return;
+    }
+
+    // Remove any existing event listeners to prevent duplicates
+    const newHamburger = hamburger.cloneNode(true);
+    hamburger.parentNode.replaceChild(newHamburger, hamburger);
+    const hamburgerElement = document.querySelector('.hamburger');
+
     // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
+    const handleScroll = () => {
+        if (navbar && window.scrollY > 100) {
             navbar.classList.add('scrolled');
-        } else {
+        } else if (navbar) {
             navbar.classList.remove('scrolled');
         }
-    });
+    };
+
+    window.addEventListener('scroll', handleScroll);
 
     // Mobile menu toggle
-    hamburger.addEventListener('click', () => {
-        const isActive = hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
+    const handleHamburgerClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         
-        // Prevent body scroll when menu is open
-        if (isActive) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-    });
+        const navMenuElement = document.querySelector('.nav-menu');
+        
+        hamburgerElement.classList.toggle('active');
+        navMenuElement.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+    };
+
+    hamburgerElement.addEventListener('click', handleHamburgerClick);
+    hamburgerElement.setAttribute('data-initialized', 'true');
 
     // Close mobile menu when clicking on nav links
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.style.overflow = '';
+            hamburgerElement.classList.remove('active');
+            document.querySelector('.nav-menu').classList.remove('active');
+            document.body.classList.remove('menu-open');
         });
     });
 
-    // Close mobile menu when clicking outside
+    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.style.overflow = '';
+        const navMenuElement = document.querySelector('.nav-menu');
+        if (!hamburgerElement.contains(e.target) && !navMenuElement.contains(e.target)) {
+            hamburgerElement.classList.remove('active');
+            navMenuElement.classList.remove('active');
+            document.body.classList.remove('menu-open');
         }
     });
 
@@ -241,13 +271,9 @@ function initContactForm() {
         submitBtn.disabled = true;
         
         // Check if EmailJS is configured
-        console.log('EMAIL_CONFIG:', window.EMAIL_CONFIG);
-        console.log('emailjs available:', typeof emailjs);
-        
         if (window.EMAIL_CONFIG && window.EMAIL_CONFIG.PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
             // Send email using EmailJS (should already be initialized)
             if (typeof emailjs !== 'undefined') {
-                console.log('Sending email via EmailJS');
                 sendEmailViaEmailJS(data, submitBtn, originalText, form);
             } else {
                 // EmailJS library not loaded
@@ -279,14 +305,10 @@ function sendEmailViaEmailJS(data, submitBtn, originalText, form) {
         message: data.message
     };
     
-    console.log('Sending email with params:', templateParams);
-    console.log('Using Service ID:', window.EMAIL_CONFIG.SERVICE_ID);
-    console.log('Using Template ID:', window.EMAIL_CONFIG.TEMPLATE_ID);
-    
-    // Use emailjs.send directly with your exact credentials
+    // Use emailjs.send directly with credentials
     emailjs.send('service_y6aydpo', 'template_nakxnuh', templateParams, 'prjIZlyUwDG8noyXF')
     .then(function(response) {
-        console.log('SUCCESS!', response.status, response.text);
+        console.log('Email sent successfully!', response.status);
         showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
         form.reset();
         submitBtn.textContent = originalText;
@@ -740,73 +762,3 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
-
-// Project filtering functionality
-function initProjectFilters() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all buttons
-            filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked button
-            btn.classList.add('active');
-
-            const filterValue = btn.getAttribute('data-filter');
-
-            projectCards.forEach(card => {
-                if (filterValue === 'all') {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeInUp 0.6s ease-out';
-                } else {
-                    const cardCategories = card.getAttribute('data-category');
-                    if (cardCategories && cardCategories.includes(filterValue)) {
-                        card.style.display = 'block';
-                        card.style.animation = 'fadeInUp 0.6s ease-out';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
-            });
-        });
-    });
-}
-
-// Enhanced skill animations
-function initSkillAnimations() {
-    const skillBars = document.querySelectorAll('.skill-progress');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const skillBar = entry.target;
-                const width = skillBar.getAttribute('data-width');
-                skillBar.style.width = width;
-                skillBar.style.transition = 'width 2s ease-in-out';
-            }
-        });
-    }, { threshold: 0.5 });
-
-    skillBars.forEach(bar => {
-        observer.observe(bar);
-    });
-}
-
-// Add smooth scrolling for CTA button
-document.addEventListener('DOMContentLoaded', function() {
-    initializePortfolio();
-    initProjectFilters();
-    initSkillAnimations();
-    
-    // Add click handler for CTA button
-    const ctaBtn = document.querySelector('.cta-section .btn');
-    if (ctaBtn) {
-        ctaBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector('#contact').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    }
-});
