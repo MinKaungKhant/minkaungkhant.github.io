@@ -71,7 +71,9 @@
                     </p>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary">View My Work</a>
-                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                        <a href="assets/MinKaungKhant_Resume.pdf" download class="btn btn-secondary">
+                            <i class="fas fa-download"></i> Download Resume
+                        </a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -83,6 +85,50 @@
             </div>
             <div class="scroll-indicator">
                 <div class="scroll-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievement Badges Section -->
+    <section class="achievements">
+        <div class="container">
+            <div class="achievements-grid">
+                <div class="achievement-badge">
+                    <div class="badge-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="badge-content">
+                        <h3>AWS Certified</h3>
+                        <p>Cloud Solutions Expert</p>
+                    </div>
+                </div>
+                <div class="achievement-badge">
+                    <div class="badge-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="badge-content">
+                        <h3>20+ Projects</h3>
+                        <p>Enterprise Solutions</p>
+                    </div>
+                </div>
+                <div class="achievement-badge">
+                    <div class="badge-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="badge-content">
+                        <h3>5 Countries</h3>
+                        <p>Global Experience</p>
+                    </div>
+                </div>
+                <div class="achievement-badge">
+                    <div class="badge-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="badge-content">
+                        <h3>Payment Systems</h3>
+                        <p>Integration Expert</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -430,8 +476,14 @@
                 <h2 class="section-title">Featured Projects</h2>
                 <p class="section-subtitle">Some of my recent work</p>
             </div>
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="payment">Payment Systems</button>
+                <button class="filter-btn" data-filter="enterprise">Enterprise</button>
+                <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+            </div>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" data-category="payment">
                     <div class="project-image">
                         <img src="images/project1.jpg" alt="TWG Flash System">
                         <div class="project-overlay">
@@ -457,7 +509,7 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-category="payment">
                     <div class="project-image">
                         <img src="images/project2.jpg" alt="Easy2Send Payment Platform">
                         <div class="project-overlay">
@@ -483,7 +535,7 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-category="enterprise">
                     <div class="project-image">
                         <img src="images/project3.jpg" alt="TATSUMI Marine System">
                         <div class="project-overlay">
@@ -496,7 +548,7 @@
                     <div class="project-content">
                         <h3 class="project-title">TATSUMI Marine System</h3>
                         <p class="project-description">
-                            Developed comprehensive marine management system for TATSUMI. Built Myanmar Power Spectrum system for meter reading and billing, and designed Medi Myanmar Group POS system deployed across 100+ branches with mobile applications.
+                            Comprehensive marine management system for cargo operations, route optimization, and fleet management across multiple countries with mobile POS integration.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">.NET Framework</span>
@@ -509,7 +561,7 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-category="enterprise">
                     <div class="project-image">
                         <img src="images/project4.jpg" alt="ERP & Management Systems">
                         <div class="project-overlay">
@@ -535,52 +587,48 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-category="mobile">
                     <div class="project-image">
-                        <img src="images/project5.jpg" alt="Workflow Compass Project">
+                        <img src="images/project5.jpg" alt="Book It App">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://www.system-exe.co.jp/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://www.sourcecode.com.mm/book-it/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
                                 <a href="#" class="project-link"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">Workflow Compass Project</h3>
+                        <h3 class="project-title">Book It App</h3>
                         <p class="project-description">
-                            Managed and developed enterprise workflow management system using MVC 5 and .NET Core. Enhanced business automation processes and implemented robust data integrity solutions for improved operational efficiency.
+                            Developed a user-friendly hotel booking application covering various regions in Myanmar, allowing users to effortlessly book and pay for hotel accommodations. Implemented robust booking and payment processing systems, ensuring secure transactions and enhanced user experience.
                         </p>
                         <div class="project-tech">
-                            <span class="tech-tag">MVC 5</span>
-                            <span class="tech-tag">.NET Core</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">Workflow Management</span>
-                            <span class="tech-tag">Business Automation</span>
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">SQLite</span>
+                            <span class="tech-tag">Mobile App</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-category="mobile">
                     <div class="project-image">
-                        <img src="images/project6.jpg" alt="SMS Gateway Migration">
+                        <img src="images/project6.jpg" alt="Grand Royal App">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://2c2p.com/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://www.sourcecode.com.mm/grand-royal-group/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
                                 <a href="#" class="project-link"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">SMS Gateway Migration</h3>
+                        <h3 class="project-title">Grand Royal App</h3>
                         <p class="project-description">
-                            Successfully migrated SMS Gateway from .NET Core 2.1 to .NET 6 implementing clean architecture principles. Enhanced system performance, security, and maintainability while ensuring zero downtime during migration.
+                            Developed an engaging lucky draw application to bolster promotional activities, creating 8 distinct lucky draw games to entice user participation. Established a robust system to manage and control lucky draw coupons ensuring a fair and transparent drawing process.
                         </p>
                         <div class="project-tech">
-                            <span class="tech-tag">.NET 6</span>
-                            <span class="tech-tag">.NET Core 2.1</span>
-                            <span class="tech-tag">Clean Architecture</span>
-                            <span class="tech-tag">SMS Gateway</span>
-                            <span class="tech-tag">Migration</span>
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">SQLite</span>
+                            <span class="tech-tag">Mobile App</span>
                         </div>
                     </div>
                 </div>
@@ -729,6 +777,62 @@
                             <span>ASP.NET</span>
                             <span>SQL Server</span>
                             <span>Web Development</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to start your next project?</h2>
+                <p>Let's discuss how I can help bring your vision to life with cutting-edge .NET solutions</p>
+                <a href="#contact" class="btn btn-primary btn-large">Start a Conversation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Clients Say</h2>
+                <p class="section-subtitle">Testimonials from my professional journey</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Min delivered exceptional .NET solutions for our payment platform. His expertise in Square API integration and real-time data processing significantly improved our system performance."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Tech Lead</h4>
+                            <span>Teromac Technologies Inc</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Outstanding work on integrating multiple payment gateways. Min's clean architecture approach and attention to detail made our global remittance platform robust and scalable."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Manager Head</h4>
+                            <span>2C2P Payment Solutions</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Delivered a comprehensive marine management system that exceeded expectations. And the Enterprise POS solution deployed across 60+ branches works flawlessly."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Founder & CEO</h4>
+                            <span>SourceCode Co., Ltd</span>
                         </div>
                     </div>
                 </div>
