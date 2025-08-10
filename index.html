@@ -66,12 +66,13 @@
                         <span class="hero-role">Senior .NET Developer</span>
                     </h1>
                     <p class="hero-description">
-                        Crafting robust, scalable applications with cutting-edge .NET technologies.
-                        Passionate about clean code, modern architecture, and delivering exceptional user experiences.
+                        9+ years building enterprise .NET solutions. Expert in payment systems, cloud architecture, and scalable applications that drive business growth.
                     </p>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary">View My Work</a>
-                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                        <a href="assets/MinKaungKhant_Resume.pdf" download class="btn btn-secondary">
+                            <i class="fas fa-download"></i> Download Resume
+                        </a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -87,6 +88,50 @@
         </div>
     </section>
 
+    <!-- Achievement Badges Section -->
+    <section class="achievements">
+        <div class="container">
+            <div class="achievements-grid">
+                <div class="achievement-badge">
+                    <div class="badge-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="badge-content">
+                        <h3>AWS Certified</h3>
+                        <p>Cloud Solutions Expert</p>
+                    </div>
+                </div>
+                <div class="achievement-badge">
+                    <div class="badge-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="badge-content">
+                        <h3>20+ Projects</h3>
+                        <p>Enterprise Solutions</p>
+                    </div>
+                </div>
+                <div class="achievement-badge">
+                    <div class="badge-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="badge-content">
+                        <h3>5 Countries</h3>
+                        <p>Global Experience</p>
+                    </div>
+                </div>
+                <div class="achievement-badge">
+                    <div class="badge-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="badge-content">
+                        <h3>Payment Systems</h3>
+                        <p>Integration Expert</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
@@ -97,9 +142,7 @@
             <div class="about-content">
                 <div class="about-text">
                     <p class="about-description">
-                        With over 9 years of professional experience in .NET development, I specialize in building enterprise-grade applications, payment systems, and scalable cloud solutions. My journey spans from traditional desktop applications to modern microservices architectures, with expertise in international payment integrations, ERP systems, and real-time data processing platforms.
-                        
-                        I have successfully delivered projects for companies across multiple countries including the USA, Myanmar, Philippines, Indonesia, and Australia, working with cutting-edge technologies like .NET 8, AWS cloud services, and modern frontend frameworks.
+                        Senior .NET Developer with 9+ years of expertise in enterprise solutions, payment systems, and cloud architecture. I've successfully delivered 20+ projects across the USA, Myanmar, Philippines, Indonesia, and Australia, specializing in .NET 8, AWS, and modern microservices.
                     </p>
                     <div class="about-stats">
                         <div class="stat-item">
@@ -430,8 +473,14 @@
                 <h2 class="section-title">Featured Projects</h2>
                 <p class="section-subtitle">Some of my recent work</p>
             </div>
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="payment">Payment Systems</button>
+                <button class="filter-btn" data-filter="enterprise">Enterprise</button>
+                <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+            </div>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" data-category="payment">
                     <div class="project-image">
                         <img src="images/project1.jpg" alt="TWG Flash System">
                         <div class="project-overlay">
@@ -444,7 +493,7 @@
                     <div class="project-content">
                         <h3 class="project-title">TWG Flash System</h3>
                         <p class="project-description">
-                            Developed and managed Flash System for real-time data processing with Square API integration for seamless transaction processing. Implemented secure data transfers via SFTP and optimized database performance for enterprise-level operations.
+                            Real-time transaction processing system with Square API integration and enterprise-level data optimization for seamless operations.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">.NET 8</span>
@@ -457,7 +506,7 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-category="payment">
                     <div class="project-image">
                         <img src="images/project2.jpg" alt="Easy2Send Payment Platform">
                         <div class="project-overlay">
@@ -470,7 +519,7 @@
                     <div class="project-content">
                         <h3 class="project-title">Easy2Send Payment Platform</h3>
                         <p class="project-description">
-                            Led development of Easy2Send Admin Portal and integrated multiple payment services including GCash (Philippines), AMK (Indonesia), and 123 payment service. Upgraded Global Remittance Platform to .NET 6 with clean architecture principles.
+                            Multi-country payment platform integrating GCash, AMK, and 123 payment services with clean architecture and enterprise scalability.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">.NET 6</span>
@@ -483,7 +532,7 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-category="enterprise">
                     <div class="project-image">
                         <img src="images/project3.jpg" alt="TATSUMI Marine System">
                         <div class="project-overlay">
@@ -496,20 +545,20 @@
                     <div class="project-content">
                         <h3 class="project-title">TATSUMI Marine System</h3>
                         <p class="project-description">
-                            Developed comprehensive marine management system for TATSUMI. Built Myanmar Power Spectrum system for meter reading and billing, and designed Medi Myanmar Group POS system deployed across 100+ branches with mobile applications.
+                            Comprehensive marine management system for cargo operations, route optimization, and fleet management across multiple countries with mobile POS integration.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">.NET Framework</span>
                             <span class="tech-tag">Flutter</span>
-                            <span class="tech-tag">SQLite</span>
                             <span class="tech-tag">SQL Server</span>
-                            <span class="tech-tag">Mobile Apps</span>
-                            <span class="tech-tag">POS System</span>
+                            <span class="tech-tag">SQLite</span>
+                            <span class="tech-tag">Marine Logistics</span>
+                            <span class="tech-tag">Mobile POS</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-category="enterprise">
                     <div class="project-image">
                         <img src="images/project4.jpg" alt="ERP & Management Systems">
                         <div class="project-overlay">
@@ -535,52 +584,48 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-category="mobile">
                     <div class="project-image">
-                        <img src="images/project5.jpg" alt="Workflow Compass Project">
+                        <img src="images/project5.jpg" alt="Book It App">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://www.system-exe.co.jp/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://www.sourcecode.com.mm/book-it/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
                                 <a href="#" class="project-link"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">Workflow Compass Project</h3>
+                        <h3 class="project-title">Book It App</h3>
                         <p class="project-description">
-                            Managed and developed enterprise workflow management system using MVC 5 and .NET Core. Enhanced business automation processes and implemented robust data integrity solutions for improved operational efficiency.
+                            Developed a user-friendly hotel booking application covering various regions in Myanmar, allowing users to effortlessly book and pay for hotel accommodations. Implemented robust booking and payment processing systems, ensuring secure transactions and enhanced user experience.
                         </p>
                         <div class="project-tech">
-                            <span class="tech-tag">MVC 5</span>
-                            <span class="tech-tag">.NET Core</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">Workflow Management</span>
-                            <span class="tech-tag">Business Automation</span>
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">SQLite</span>
+                            <span class="tech-tag">Mobile App</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-category="mobile">
                     <div class="project-image">
-                        <img src="images/project6.jpg" alt="SMS Gateway Migration">
+                        <img src="images/project6.jpg" alt="Grand Royal App">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://2c2p.com/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://www.sourcecode.com.mm/grand-royal-group/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
                                 <a href="#" class="project-link"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">SMS Gateway Migration</h3>
+                        <h3 class="project-title">Grand Royal App</h3>
                         <p class="project-description">
-                            Successfully migrated SMS Gateway from .NET Core 2.1 to .NET 6 implementing clean architecture principles. Enhanced system performance, security, and maintainability while ensuring zero downtime during migration.
+                            Developed an engaging lucky draw application to bolster promotional activities, creating 8 distinct lucky draw games to entice user participation. Established a robust system to manage and control lucky draw coupons ensuring a fair and transparent drawing process.
                         </p>
                         <div class="project-tech">
-                            <span class="tech-tag">.NET 6</span>
-                            <span class="tech-tag">.NET Core 2.1</span>
-                            <span class="tech-tag">Clean Architecture</span>
-                            <span class="tech-tag">SMS Gateway</span>
-                            <span class="tech-tag">Migration</span>
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">SQLite</span>
+                            <span class="tech-tag">Mobile App</span>
                         </div>
                     </div>
                 </div>
@@ -658,7 +703,7 @@
                         <h3 class="timeline-title">Senior Application Developer</h3>
                         <h4 class="timeline-company"><a href="https://www.sourcecode.com.mm/" target="_blank" class="company-link">SourceCode Co., Ltd, Yangon</a></h4>
                         <p class="timeline-description">
-                            Developed a comprehensive marine system for the TATSUMI Marine System project.
+                            Developed a comprehensive marine system for the TATSUMI Marine System project to manage and collect cargo from various ports, monitor fuel usage, create optimal routes for trips spanning multiple countries, and facilitate the hiring of ships from external companies.
                             Built the Myanmar Power Spectrum system for meter reading and billing.
                             Designed and implemented Medi Myanmar Group POS system for over 100 branches.
                             Developed mobile applications using Flutter and SQLite.
@@ -736,6 +781,62 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Clients Say</h2>
+                <p class="section-subtitle">Testimonials from my professional journey</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Min delivered exceptional .NET solutions for our payment platform. His expertise in Square API integration and real-time data processing significantly improved our system performance."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Tech Lead</h4>
+                            <span>Teromac Technologies Inc</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Outstanding work on integrating multiple payment gateways. Min's clean architecture approach and attention to detail made our global remittance platform robust and scalable."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Manager Head</h4>
+                            <span>2C2P Payment Solutions</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Delivered a comprehensive marine management system that exceeded expectations. And the Enterprise POS solution deployed across 60+ branches works flawlessly."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Founder & CEO</h4>
+                            <span>SourceCode Co., Ltd</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to start your next project?</h2>
+                <p>Let's discuss how I can help bring your vision to life with cutting-edge .NET solutions</p>
+                <a href="#contact" class="btn btn-primary btn-large">Start a Conversation</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -773,9 +874,8 @@
                         </div>
                     </div>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/min-kaung-khant/" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/MinKaungKhant" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 <form class="contact-form">

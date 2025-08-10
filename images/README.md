@@ -25,13 +25,14 @@ This directory contains all the images used in the portfolio website.
    - Recommended size: 600x400px
    - Format: JPG or PNG
 
-6. **project5.jpg** - Workflow Compass Project screenshot
+6. **project5.jpg** - Book It App screenshot
    - Recommended size: 600x400px
    - Format: JPG or PNG
 
-7. **project6.jpg** - SMS Gateway Migration screenshot
+7. **project6.jpg** - Grand Royal App screenshot
    - Recommended size: 600x400px
    - Format: JPG or PNG
+
 
 ## How to add your images:
 

@@ -655,3 +655,73 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
+// Project filtering functionality
+function initProjectFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            projectCards.forEach(card => {
+                if (filterValue === 'all') {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeInUp 0.6s ease-out';
+                } else {
+                    const cardCategories = card.getAttribute('data-category');
+                    if (cardCategories && cardCategories.includes(filterValue)) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeInUp 0.6s ease-out';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        });
+    });
+}
+
+// Enhanced skill animations
+function initSkillAnimations() {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const skillBar = entry.target;
+                const width = skillBar.getAttribute('data-width');
+                skillBar.style.width = width;
+                skillBar.style.transition = 'width 2s ease-in-out';
+            }
+        });
+    }, { threshold: 0.5 });
+
+    skillBars.forEach(bar => {
+        observer.observe(bar);
+    });
+}
+
+// Add smooth scrolling for CTA button
+document.addEventListener('DOMContentLoaded', function() {
+    initializePortfolio();
+    initProjectFilters();
+    initSkillAnimations();
+    
+    // Add click handler for CTA button
+    const ctaBtn = document.querySelector('.cta-section .btn');
+    if (ctaBtn) {
+        ctaBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    }
+});
