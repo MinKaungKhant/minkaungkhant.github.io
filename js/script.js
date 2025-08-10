@@ -7,6 +7,44 @@ function initializePortfolio() {
     // Initialize EmailJS first
     initEmailJS();
     
+    // Add a global test function regardless of EmailJS status
+    window.testEmailJS = function() {
+        console.log('Testing EmailJS...');
+        console.log('emailjs available:', typeof emailjs);
+        console.log('EMAIL_CONFIG:', window.EMAIL_CONFIG);
+        
+        if (typeof emailjs === 'undefined') {
+            alert('EmailJS library not loaded!');
+            return;
+        }
+        
+        if (!window.EMAIL_CONFIG) {
+            alert('EMAIL_CONFIG not found!');
+            return;
+        }
+        
+        const testParams = {
+            from_name: "Test User",
+            from_email: "test@example.com",
+            subject: "Test Email",
+            message: "This is a test message from the portfolio contact form."
+        };
+        
+        console.log('Sending test email with params:', testParams);
+        
+        // Use the direct approach with hardcoded values
+        emailjs.send('service_y6aydpo', 'template_nakxnuh', testParams, 'prjIZlyUwDG8noyXF')
+        .then(function(response) {
+            console.log('TEST SUCCESS!', response.status, response.text);
+            alert('Test email sent successfully! Check your Gmail.');
+        }, function(error) {
+            console.log('TEST FAILED...', error);
+            alert('Test email failed: ' + JSON.stringify(error));
+        });
+    };
+    
+    console.log('Test function created. Type window.testEmailJS() to test.');
+    
     // Initialize all components
     initNavigation();
     initScrollAnimations();
@@ -20,8 +58,21 @@ function initializePortfolio() {
 
 // Initialize EmailJS
 function initEmailJS() {
-    if (typeof emailjs !== 'undefined' && window.EMAIL_CONFIG && window.EMAIL_CONFIG.PUBLIC_KEY) {
-        emailjs.init(window.EMAIL_CONFIG.PUBLIC_KEY);
+    console.log('Initializing EmailJS...');
+    console.log('emailjs type:', typeof emailjs);
+    console.log('EMAIL_CONFIG:', window.EMAIL_CONFIG);
+    
+    if (typeof emailjs !== 'undefined') {
+        if (window.EMAIL_CONFIG && window.EMAIL_CONFIG.PUBLIC_KEY) {
+            emailjs.init(window.EMAIL_CONFIG.PUBLIC_KEY);
+            console.log('✅ EmailJS initialized with public key:', window.EMAIL_CONFIG.PUBLIC_KEY);
+        } else {
+            // Fallback: initialize with hardcoded key
+            emailjs.init('prjIZlyUwDG8noyXF');
+            console.log('✅ EmailJS initialized with hardcoded key');
+        }
+    } else {
+        console.log('❌ EmailJS library not available');
     }
 }
 
@@ -31,31 +82,6 @@ function initNavigation() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
-
-    if (!hamburger || !navMenu) {
-        console.error('Hamburger menu elements not found!');
-        return;
-    }
-
-    function updateARIA() {
-        const isExpanded = hamburger.classList.contains('active');
-        hamburger.setAttribute('aria-expanded', isExpanded);
-        navMenu.setAttribute('aria-hidden', !isExpanded);
-    }
-
-    // Helper function to close mobile menu
-    function closeMobileMenu() {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-        document.body.classList.remove('menu-open');
-    }
-
-    // Helper function to toggle mobile menu
-    function toggleMobileMenu() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
-    }
 
     // Navbar scroll effect
     window.addEventListener('scroll', () => {
@@ -67,40 +93,33 @@ function initNavigation() {
     });
 
     // Mobile menu toggle
-    hamburger.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleMobileMenu();
-        updateARIA();
+    hamburger.addEventListener('click', () => {
+        const isActive = hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        if (isActive) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
     });
 
     // Close mobile menu when clicking on nav links
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            closeMobileMenu();
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
         });
     });
 
-    // Close menu when clicking outside
+    // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
-        if (navMenu.classList.contains('active') && 
-            !navMenu.contains(e.target) && 
-            !hamburger.contains(e.target)) {
-            closeMobileMenu();
-        }
-    });
-
-    // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-            closeMobileMenu();
-        }
-    });
-
-    // Handle window resize - close menu if switching to desktop view
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
-            closeMobileMenu();
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
         }
     });
 
@@ -111,6 +130,7 @@ function initNavigation() {
         
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
             if (scrollY >= sectionTop - 200) {
                 current = section.getAttribute('id');
             }
@@ -218,17 +238,13 @@ function initContactForm() {
         submitBtn.disabled = true;
         
         // Check if EmailJS is configured
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            console.log('EMAIL_CONFIG:', window.EMAIL_CONFIG);
-            console.log('emailjs available:', typeof emailjs);
-        }
+        console.log('EMAIL_CONFIG:', window.EMAIL_CONFIG);
+        console.log('emailjs available:', typeof emailjs);
         
         if (window.EMAIL_CONFIG && window.EMAIL_CONFIG.PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
             // Send email using EmailJS (should already be initialized)
             if (typeof emailjs !== 'undefined') {
-                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                    console.log('Sending email via EmailJS');
-                }
+                console.log('Sending email via EmailJS');
                 sendEmailViaEmailJS(data, submitBtn, originalText, form);
             } else {
                 // EmailJS library not loaded
@@ -260,27 +276,21 @@ function sendEmailViaEmailJS(data, submitBtn, originalText, form) {
         message: data.message
     };
     
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        console.log('Sending email with params:', templateParams);
-        console.log('Using Service ID:', window.EMAIL_CONFIG.SERVICE_ID);
-        console.log('Using Template ID:', window.EMAIL_CONFIG.TEMPLATE_ID);
-    }
+    console.log('Sending email with params:', templateParams);
+    console.log('Using Service ID:', window.EMAIL_CONFIG.SERVICE_ID);
+    console.log('Using Template ID:', window.EMAIL_CONFIG.TEMPLATE_ID);
     
     // Use emailjs.send directly with your exact credentials
     emailjs.send('service_y6aydpo', 'template_nakxnuh', templateParams, 'prjIZlyUwDG8noyXF')
     .then(function(response) {
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            console.log('SUCCESS!', response.status, response.text);
-        }
+        console.log('SUCCESS!', response.status, response.text);
         showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
         form.reset();
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
     }, function(error) {
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            console.log('FAILED...', error);
-            console.log('Error details:', JSON.stringify(error));
-        }
+        console.log('FAILED...', error);
+        console.log('Error details:', JSON.stringify(error));
         showNotification('Failed to send message. Error: ' + (error.text || error.message || 'Unknown error'), 'error');
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;

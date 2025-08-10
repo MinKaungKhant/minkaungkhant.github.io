@@ -17,10 +17,6 @@ body {
     overflow-x: hidden;
 }
 
-body.menu-open {
-    overflow: hidden;
-}
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -147,48 +143,29 @@ p {
 .hamburger {
     display: none;
     flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
     cursor: pointer;
-    padding: 0;
-    background: none;
-    border: none;
-    outline: none;
-    position: relative;
     z-index: 1001;
 }
 
-.hamburger:hover {
-    opacity: 0.8;
-}
-
-.hamburger:focus-visible {
-    outline: 2px solid #667eea;
-    outline-offset: 5px;
-    border-radius: 4px;
-}
-
 .hamburger span {
-    width: 100%;
+    width: 25px;
     height: 3px;
     background: #ffffff;
+    margin: 3px 0;
+    transition: 0.3s;
     border-radius: 3px;
-    transition: all 0.3s ease-in-out;
-    transform-origin: left center;
 }
 
 .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(1px, -2px);
+    transform: rotate(-45deg) translate(-5px, 6px);
 }
 
 .hamburger.active span:nth-child(2) {
     opacity: 0;
-    transform: translateX(-20px);
 }
 
 .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(1px, 1px);
+    transform: rotate(45deg) translate(-5px, -6px);
 }
 
 /* Hero Section */
@@ -1251,12 +1228,11 @@ section {
         background-color: rgba(10, 10, 10, 0.98);
         width: 100%;
         text-align: center;
-        transition: left 0.3s ease;
+        transition: 0.3s ease-in-out;
         backdrop-filter: blur(20px);
         padding: 40px 0;
-        z-index: 999;
-        height: calc(100vh - 70px);
-        overflow-y: auto;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
     }
 
     .nav-menu.active {
@@ -1264,26 +1240,24 @@ section {
     }
 
     .nav-menu li {
-        margin: 20px 0;
+        margin: 15px 0;
     }
 
     .nav-link {
-        display: block;
-        padding: 15px 20px;
         font-size: 18px;
-        border-radius: 8px;
-        margin: 0 20px;
+        padding: 10px 20px;
+        display: block;
         transition: all 0.3s ease;
     }
 
     .nav-link:hover {
-        background-color: rgba(102, 126, 234, 0.1);
         color: #667eea;
+        background-color: rgba(102, 126, 234, 0.1);
+        border-radius: 10px;
     }
 
     .hamburger {
-        display: flex !important;
-        z-index: 1001;
+        display: flex;
     }
 
     .hero-content {
