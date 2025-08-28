@@ -350,7 +350,7 @@ p {
 
 .hero-image {
     display: flex;
-    justify-content: center;
+    justify-content: top;
     animation: fadeInUp 1s ease-out 0.4s both;
     will-change: transform, opacity;
     backface-visibility: hidden;

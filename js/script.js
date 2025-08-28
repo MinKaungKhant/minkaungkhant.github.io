@@ -431,13 +431,12 @@ function initContactForm() {
             }
         } else {
             console.log('❌ EmailJS config not found or invalid');
-            // Fallback: Demo mode with simulation
+            // EmailJS not configured properly
             setTimeout(() => {
-                showNotification('Demo Mode: EmailJS not configured. Please set up your EmailJS credentials.', 'info');
-                form.reset();
+                showNotification('Error: EmailJS not configured properly. Please check configuration.', 'error');
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-            }, 2000);
+            }, 1000);
         }
     });
 }
