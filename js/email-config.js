@@ -15,7 +15,8 @@ const EMAIL_CONFIG = {
     SERVICE_ID: 'service_y6aydpo',
     
     // Get from EmailJS Dashboard -> Email Templates
-    TEMPLATE_ID: 'template_nakxnuh'
+    TEMPLATE_ID: 'template_nakxnuh', // Original template
+    VISITOR_TEMPLATE_ID: 'template_xvpv19h' // New template with visitor info
 };
 
 // Initialize EmailJS

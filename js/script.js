@@ -1,14 +1,28 @@
+// Global flag to prevent multiple initializations
+let portfolioInitialized = false;
+
+// Global variable to store visitor information
+let visitorInfo = null;
+
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    initializePortfolio();
+    if (!portfolioInitialized) {
+        initializePortfolio();
+    }
 });
 
 // Fallback for older browsers or if DOMContentLoaded already fired
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializePortfolio);
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!portfolioInitialized) {
+            initializePortfolio();
+        }
+    });
 } else {
     // DOM is already loaded
-    initializePortfolio();
+    if (!portfolioInitialized) {
+        initializePortfolio();
+    }
 }
 
 // Additional fallback for window load event
@@ -22,40 +36,26 @@ window.addEventListener('load', function() {
 });
 
 function initializePortfolio() {
+    if (portfolioInitialized) {
+        console.log('Portfolio already initialized, skipping...');
+        return;
+    }
+    
+    portfolioInitialized = true;
     console.log('Initializing Portfolio...');
     
     // Initialize EmailJS first
     initEmailJS();
     
-    // Add a global test function for EmailJS testing (development only)
-    window.testEmailJS = function() {
-        console.log('Testing EmailJS...');
+    // Fetch visitor information in the background
+    fetchVisitorInfo().then((info) => {
+        console.log('📍 Visitor location detected:', info.city, info.country);
         
-        if (typeof emailjs === 'undefined') {
-            alert('EmailJS library not loaded!');
-            return;
-        }
-        
-        const testParams = {
-            from_name: "Test User",
-            from_email: "test@example.com",
-            subject: "Test Email",
-            message: "This is a test message from the portfolio contact form."
-        };
-        
-        console.log('Sending test email...');
-        
-        emailjs.send('service_y6aydpo', 'template_nakxnuh', testParams, 'prjIZlyUwDG8noyXF')
-        .then(function(response) {
-            console.log('TEST SUCCESS!', response.status, response.text);
-            alert('Test email sent successfully! Check your Gmail.');
-        }, function(error) {
-            console.log('TEST FAILED...', error);
-            alert('Test email failed: ' + JSON.stringify(error));
-        });
-    };
-    
-    console.log('Test function available: window.testEmailJS()');
+        // Automatically send visitor notification email after fetching visitor info
+        setTimeout(() => {
+            sendVisitorNotificationEmail(info);
+        }, 2000); // Wait 2 seconds to ensure all data is loaded
+    });
     
     // Initialize all components with small delays to ensure DOM is ready
     setTimeout(() => {
@@ -70,6 +70,7 @@ function initializePortfolio() {
         initProjectFilters();
         initSkillAnimations();
         initCTAScroll();
+        initResumeDownload(); // Initialize resume download tracking
         console.log('Portfolio initialization complete!');
     }, 50);
 }
@@ -90,6 +91,132 @@ function initEmailJS() {
     } else {
         console.log('❌ EmailJS library not available');
     }
+}
+
+// Fetch visitor IP and location information
+async function fetchVisitorInfo() {
+    try {
+        console.log('🌍 Fetching visitor information...');
+        
+        const response = await fetch('https://ipapi.co/json/', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Check if the API returned an error
+        if (data.error) {
+            throw new Error(data.reason || 'API returned an error');
+        }
+        
+        visitorInfo = {
+            ip: data.ip || 'Unknown',
+            city: data.city || 'Unknown',
+            region: data.region || 'Unknown',
+            country: data.country_name || 'Unknown',
+            countryCode: data.country_code || 'Unknown',
+            timezone: data.timezone || 'Unknown',
+            isp: data.org || 'Unknown',
+            postal: data.postal || 'Unknown',
+            latitude: data.latitude || 'Unknown',
+            longitude: data.longitude || 'Unknown'
+        };
+        
+        console.log('✅ Visitor info fetched successfully:', visitorInfo);
+        return visitorInfo;
+        
+    } catch (error) {
+        console.error('❌ Failed to fetch visitor information:', error);
+        
+        // Set fallback visitor info
+        visitorInfo = {
+            ip: 'Unable to fetch',
+            city: 'Unable to fetch',
+            region: 'Unable to fetch',
+            country: 'Unable to fetch',
+            countryCode: 'Unable to fetch',
+            timezone: 'Unable to fetch',
+            isp: 'Unable to fetch',
+            postal: 'Unable to fetch',
+            latitude: 'Unable to fetch',
+            longitude: 'Unable to fetch',
+            error: error.message
+        };
+        
+        return visitorInfo;
+    }
+}
+
+// Send visitor notification email automatically
+function sendVisitorNotificationEmail(visitorData) {
+    // Check if we should send visitor notifications (avoid spam)
+    const lastVisitEmail = localStorage.getItem('lastVisitorEmailSent');
+    const now = Date.now();
+    const oneHour = 60 * 60 * 1000; // 1 hour in milliseconds (for production)
+    
+    // Only send email once per hour per visitor (production mode)
+    if (lastVisitEmail && (now - parseInt(lastVisitEmail)) < oneHour) {
+        console.log('⏰ Visitor email already sent recently, skipping...');
+        return;
+    }
+    
+    console.log('📧 Sending visitor notification email...');
+    
+    // Prepare visitor notification data (visitor info only)
+    const visitorNotificationData = {
+        action_type: 'page_visit',
+        activity_message: `Visitor from ${visitorInfo?.city || 'Unknown'}, ${visitorInfo?.country || 'Unknown'} accessed your portfolio website.`
+    };
+    
+    // Send the email
+    sendEmailViaEmailJS(visitorNotificationData, null, null, null);
+    
+    // Store timestamp to prevent spam
+    localStorage.setItem('lastVisitorEmailSent', now.toString());
+    
+    console.log('✅ Visitor notification email sent');
+}
+
+// Initialize resume download tracking
+function initResumeDownload() {
+    // Find all resume download links
+    const resumeLinks = document.querySelectorAll('a[href*="resume"], a[href*="Resume"], a[href*="CV"], a[href*="cv"]');
+    
+    resumeLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            console.log('📄 Resume download detected');
+            
+            // Send resume download notification email
+            setTimeout(() => {
+                sendResumeDownloadEmail();
+            }, 500); // Small delay to ensure download starts
+        });
+    });
+    
+    console.log(`📄 Resume download tracking initialized for ${resumeLinks.length} links`);
+}
+
+// Send resume download notification email
+function sendResumeDownloadEmail() {
+    console.log('📧 Sending resume download notification email...');
+    
+    // Prepare resume download notification data (visitor info only)
+    const resumeDownloadData = {
+        action_type: 'resume_download',
+        activity_message: `IP ${visitorInfo?.ip || 'Unknown'} from ${visitorInfo?.city || 'Unknown'}, ${visitorInfo?.country || 'Unknown'} downloaded your resume.`
+    };
+    
+    // Send the email (no rate limiting for resume downloads)
+    sendEmailViaEmailJS(resumeDownloadData, null, null, null);
+    
+    console.log('✅ Resume download notification email sent');
 }
 
 // Navigation functionality
@@ -256,13 +383,27 @@ function animateCounters() {
 function initContactForm() {
     const form = document.querySelector('.contact-form');
     if (!form) return;
+    
+    // Check if form already has event listener to prevent duplicates
+    if (form.hasAttribute('data-initialized')) {
+        console.log('Contact form already initialized, skipping...');
+        return;
+    }
+    
+    // Mark as initialized
+    form.setAttribute('data-initialized', 'true');
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
+        console.log('📝 Form submission handler triggered');
+        console.log('🔍 Current visitorInfo:', visitorInfo);
+        
         // Get form data
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
+        
+        console.log('📊 Form data:', data);
         
         // Show loading state
         const submitBtn = form.querySelector('button[type="submit"]');
@@ -272,10 +413,15 @@ function initContactForm() {
         
         // Check if EmailJS is configured
         if (window.EMAIL_CONFIG && window.EMAIL_CONFIG.PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+            console.log('✅ EmailJS config found:', window.EMAIL_CONFIG);
             // Send email using EmailJS (should already be initialized)
             if (typeof emailjs !== 'undefined') {
+                console.log('✅ EmailJS library is loaded');
+                // Add action_type for contact form submissions
+                data.action_type = 'contact_form';
                 sendEmailViaEmailJS(data, submitBtn, originalText, form);
             } else {
+                console.log('❌ EmailJS library not loaded');
                 // EmailJS library not loaded
                 setTimeout(() => {
                     showNotification('Error: EmailJS library not loaded. Please refresh the page.', 'error');
@@ -284,6 +430,7 @@ function initContactForm() {
                 }, 1000);
             }
         } else {
+            console.log('❌ EmailJS config not found or invalid');
             // Fallback: Demo mode with simulation
             setTimeout(() => {
                 showNotification('Demo Mode: EmailJS not configured. Please set up your EmailJS credentials.', 'info');
@@ -297,28 +444,80 @@ function initContactForm() {
 
 // Send email using EmailJS
 function sendEmailViaEmailJS(data, submitBtn, originalText, form) {
-    // Use the simplest possible template parameters
-    const templateParams = {
-        from_name: data.name,
-        from_email: data.email,
-        subject: data.subject,
-        message: data.message
-    };
+    console.log('🚀 Sending email via EmailJS...');
     
-    // Use emailjs.send directly with credentials
-    emailjs.send('service_y6aydpo', 'template_nakxnuh', templateParams, 'prjIZlyUwDG8noyXF')
+    // Use different templates based on action type
+    let templateId;
+    let templateParams;
+    
+    if (data?.action_type === 'contact_form') {
+        // Use contact form template for contact submissions
+        templateId = window.EMAIL_CONFIG?.TEMPLATE_ID || 'template_nakxnuh';
+        templateParams = {
+            from_name: data?.name || 'Contact Form User',
+            from_email: data?.email || 'unknown@email.com',
+            subject: data?.subject || 'Contact Form Message',
+            message: data?.message || 'No message provided',
+            reply_to: data?.email || 'unknown@email.com'
+        };
+    } else {
+        // Use visitor template for page visits and resume downloads
+        templateId = window.EMAIL_CONFIG?.VISITOR_TEMPLATE_ID || 'template_xvpv19h';
+        templateParams = {
+            // Action type (page_visit, resume_download)
+            action_type: data?.action_type || 'page_visit',
+            
+            // Activity message for page visits and resume downloads
+            activity_message: data?.activity_message || '',
+            
+            // Contact form fields (empty for visitor tracking)
+            from_name: '',
+            from_email: '',
+            subject: '',
+            message: '',
+            
+            // Visitor information fields - using simple strings
+            visitor_ip: String(visitorInfo?.ip || 'Unknown'),
+            visitor_city: String(visitorInfo?.city || 'Unknown'),
+            visitor_region: String(visitorInfo?.region || 'Unknown'), 
+            visitor_country: String(visitorInfo?.country || 'Unknown'),
+            visitor_country_code: String(visitorInfo?.countryCode || 'Unknown'),
+            visitor_timezone: String(visitorInfo?.timezone || 'Unknown'),
+            visitor_isp: String(visitorInfo?.isp || 'Unknown'),
+            visitor_postal: String(visitorInfo?.postal || 'Unknown'),
+            visitor_latitude: String(visitorInfo?.latitude || 'Unknown'),
+            visitor_longitude: String(visitorInfo?.longitude || 'Unknown'),
+            timestamp: String(new Date().toLocaleString()),
+            error_message: String(visitorInfo?.error || '')
+        };
+    }
+    
+    console.log('📧 Using template:', templateId);
+    console.log('📧 Template params:', templateParams);
+    
+    // Use emailjs.send with the visitor template
+    emailjs.send(
+        window.EMAIL_CONFIG?.SERVICE_ID || 'service_y6aydpo', 
+        templateId, 
+        templateParams, 
+        window.EMAIL_CONFIG?.PUBLIC_KEY || 'prjIZlyUwDG8noyXF'
+    )
     .then(function(response) {
-        console.log('Email sent successfully!', response.status);
-        showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
-        form.reset();
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
+        console.log('✅ Email sent successfully!', response.status);
+        if (submitBtn && form) {
+            showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+            form.reset();
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
     }, function(error) {
-        console.log('FAILED...', error);
+        console.log('❌ Email sending failed:', error);
         console.log('Error details:', JSON.stringify(error));
-        showNotification('Failed to send message. Error: ' + (error.text || error.message || 'Unknown error'), 'error');
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
+        if (submitBtn && form) {
+            showNotification('Failed to send message. Error: ' + (error.text || error.message || 'Unknown error'), 'error');
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
     });
 }
 
