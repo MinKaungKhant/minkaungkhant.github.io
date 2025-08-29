@@ -108,7 +108,8 @@ async function fetchVisitorInfo() {
                 isp: data.org,
                 postal: data.postal,
                 latitude: data.latitude,
-                longitude: data.longitude
+                longitude: data.longitude,
+                source: "ipapi.co"
             })
         },
         {
@@ -123,7 +124,8 @@ async function fetchVisitorInfo() {
                 isp: data.isp,
                 postal: data.postal,
                 latitude: data.latitude,
-                longitude: data.longitude
+                longitude: data.longitude,
+                source: "ipwhois.app"
             })
         },
         {
@@ -140,13 +142,12 @@ async function fetchVisitorInfo() {
                     isp: data.org,
                     postal: data.postal,
                     latitude: lat,
-                    longitude: lon
+                    longitude: lon,
+                    source: "ipinfo.io"
                 };
             }
         }
     ];
-
-    let visitorInfo = null;
 
     for (const api of apis) {
         try {
@@ -189,10 +190,10 @@ function sendVisitorNotificationEmail(visitorData) {
     // Check if we should send visitor notifications (avoid spam)
     const lastVisitEmail = localStorage.getItem('lastVisitorEmailSent');
     const now = Date.now();
-    const oneHour = 60 * 60 * 1000; // 1 hour in milliseconds (for production)
-    
-    // Only send email once per hour per visitor (production mode)
-    if (lastVisitEmail && (now - parseInt(lastVisitEmail)) < oneHour) {
+    const fifteenMinutes = 15 * 60 * 1000; // 15 minutes in milliseconds (for production)
+
+    // Only send email once per 15 minutes per visitor (production mode)
+    if (lastVisitEmail && (now - parseInt(lastVisitEmail)) < fifteenMinutes) {
         console.log('⏰ Visitor email already sent recently, skipping...');
         return;
     }
@@ -201,7 +202,7 @@ function sendVisitorNotificationEmail(visitorData) {
     
     // Prepare visitor notification data (visitor info only)
     const visitorNotificationData = {
-        action_type: 'page_visit',
+        action_type: 'Page_Visit',
         activity_message: `Visitor from ${visitorInfo?.city || 'Unknown'}, ${visitorInfo?.country || 'Unknown'} accessed your portfolio website.`
     };
     
@@ -239,7 +240,7 @@ function sendResumeDownloadEmail() {
     
     // Prepare resume download notification data (visitor info only)
     const resumeDownloadData = {
-        action_type: 'resume_download',
+        action_type: 'Resume_Download',
         activity_message: `IP ${visitorInfo?.ip || 'Unknown'} from ${visitorInfo?.city || 'Unknown'}, ${visitorInfo?.country || 'Unknown'} downloaded your resume.`
     };
     
@@ -448,7 +449,7 @@ function initContactForm() {
             if (typeof emailjs !== 'undefined') {
                 console.log('✅ EmailJS library is loaded');
                 // Add action_type for contact form submissions
-                data.action_type = 'contact_form';
+                data.action_type = 'Contact_Form';
                 sendEmailViaEmailJS(data, submitBtn, originalText, form);
             } else {
                 console.log('❌ EmailJS library not loaded');
@@ -479,7 +480,7 @@ function sendEmailViaEmailJS(data, submitBtn, originalText, form) {
     let templateId;
     let templateParams;
     
-    if (data?.action_type === 'contact_form') {
+    if (data?.action_type === 'Contact_Form') {
         // Use contact form template for contact submissions
         templateId = window.EMAIL_CONFIG?.TEMPLATE_ID || 'template_nakxnuh';
         templateParams = {
@@ -494,16 +495,10 @@ function sendEmailViaEmailJS(data, submitBtn, originalText, form) {
         templateId = window.EMAIL_CONFIG?.VISITOR_TEMPLATE_ID || 'template_xvpv19h';
         templateParams = {
             // Action type (page_visit, resume_download)
-            action_type: data?.action_type || 'page_visit',
+            action_type: data?.action_type || 'Page_Visit',
             
             // Activity message for page visits and resume downloads
             activity_message: data?.activity_message || '',
-            
-            // Contact form fields (empty for visitor tracking)
-            from_name: '',
-            from_email: '',
-            subject: '',
-            message: '',
             
             // Visitor information fields - using simple strings
             visitor_ip: String(visitorInfo?.ip || 'Unknown'),
@@ -517,6 +512,7 @@ function sendEmailViaEmailJS(data, submitBtn, originalText, form) {
             visitor_latitude: String(visitorInfo?.latitude || 'Unknown'),
             visitor_longitude: String(visitorInfo?.longitude || 'Unknown'),
             timestamp: String(new Date().toLocaleString()),
+            source: String(visitorInfo?.source || 'Unknown'),
             error_message: String(visitorInfo?.error || '')
         };
     }
