@@ -95,64 +95,94 @@ function initEmailJS() {
 
 // Fetch visitor IP and location information
 async function fetchVisitorInfo() {
-    try {
-        console.log('🌍 Fetching visitor information...');
-        
-        const response = await fetch('https://ipapi.co/json/', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json'
+    const apis = [
+        {
+            url: 'https://ipapi.co/json/',
+            mapper: data => ({
+                ip: data.ip,
+                city: data.city,
+                region: data.region,
+                country: data.country_name,
+                countryCode: data.country_code,
+                timezone: data.timezone,
+                isp: data.org,
+                postal: data.postal,
+                latitude: data.latitude,
+                longitude: data.longitude
+            })
+        },
+        {
+            url: 'https://ipwhois.app/json/',
+            mapper: data => ({
+                ip: data.ip,
+                city: data.city,
+                region: data.region,
+                country: data.country,
+                countryCode: data.country_code,
+                timezone: data.timezone,
+                isp: data.isp,
+                postal: data.postal,
+                latitude: data.latitude,
+                longitude: data.longitude
+            })
+        },
+        {
+            url: 'https://ipinfo.io/json?token=7e7a1db079b8c5', // get a free token at ipinfo.io
+            mapper: data => {
+                const [lat, lon] = data.loc ? data.loc.split(',') : [null, null];
+                return {
+                    ip: data.ip,
+                    city: data.city,
+                    region: data.region,
+                    country: data.country,
+                    countryCode: data.country,
+                    timezone: data.timezone,
+                    isp: data.org,
+                    postal: data.postal,
+                    latitude: lat,
+                    longitude: lon
+                };
             }
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
-        const data = await response.json();
-        
-        // Check if the API returned an error
-        if (data.error) {
-            throw new Error(data.reason || 'API returned an error');
+    ];
+
+    let visitorInfo = null;
+
+    for (const api of apis) {
+        try {
+            console.log(`🌍 Trying API: ${api.url}`);
+            const response = await fetch(api.url, { headers: { 'Accept': 'application/json' } });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+
+            if (data.error) throw new Error(data.reason || 'API returned error');
+
+            visitorInfo = api.mapper(data);
+            console.log('✅ Visitor info fetched successfully:', visitorInfo);
+            return visitorInfo;
+        } catch (err) {
+            console.warn(`⚠️ API failed: ${api.url} → ${err.message}`);
         }
-        
-        visitorInfo = {
-            ip: data.ip || 'Unknown',
-            city: data.city || 'Unknown',
-            region: data.region || 'Unknown',
-            country: data.country_name || 'Unknown',
-            countryCode: data.country_code || 'Unknown',
-            timezone: data.timezone || 'Unknown',
-            isp: data.org || 'Unknown',
-            postal: data.postal || 'Unknown',
-            latitude: data.latitude || 'Unknown',
-            longitude: data.longitude || 'Unknown'
-        };
-        
-        console.log('✅ Visitor info fetched successfully:', visitorInfo);
-        return visitorInfo;
-        
-    } catch (error) {
-        console.error('❌ Failed to fetch visitor information:', error);
-        
-        // Set fallback visitor info
-        visitorInfo = {
-            ip: 'Unable to fetch',
-            city: 'Unable to fetch',
-            region: 'Unable to fetch',
-            country: 'Unable to fetch',
-            countryCode: 'Unable to fetch',
-            timezone: 'Unable to fetch',
-            isp: 'Unable to fetch',
-            postal: 'Unable to fetch',
-            latitude: 'Unable to fetch',
-            longitude: 'Unable to fetch',
-            error: error.message
-        };
-        
-        return visitorInfo;
     }
+
+    // If all APIs failed → fallback
+    console.error('❌ All APIs failed, using fallback visitor info');
+    visitorInfo = {
+        ip: 'Unable to fetch',
+        city: 'Unable to fetch',
+        region: 'Unable to fetch',
+        country: 'Unable to fetch',
+        countryCode: 'Unable to fetch',
+        timezone: 'Unable to fetch',
+        isp: 'Unable to fetch',
+        postal: 'Unable to fetch',
+        latitude: 'Unable to fetch',
+        longitude: 'Unable to fetch'
+    };
+
+    return visitorInfo;
 }
+
 
 // Send visitor notification email automatically
 function sendVisitorNotificationEmail(visitorData) {
@@ -946,17 +976,4 @@ function initCTAScroll() {
             });
         });
     }
-}
-
-// Service Worker registration (for PWA features)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-                console.log('SW registered: ', registration);
-            })
-            .catch(registrationError => {
-                console.log('SW registration failed: ', registrationError);
-            });
-    });
 }
