@@ -3,184 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Privacy Policy for Little Luck by K2 Labs.">
-  <meta name="robots" content="index,follow">
-  <title>Privacy Policy - Little Luck</title>
+  <title>Privacy Policy & Data Deletion — Little Luck</title>
   <style>
     :root {
-      color-scheme: light dark;
-      --bg: #ffffff;
-      --surface: #f8f7f4;
-      --text: #171717;
-      --muted: #66625b;
-      --border: #e7e3da;
-      --accent: #9a6f16;
+      --bg: #FFFDF9;
+      --card-bg: #FFF7E8;
+      --card-border: #FFE58F;
+      --text: #2C2825;
+      --heading: #1E1B17;
+      --accent: #D48806;
+      --clover: #2E7D32;
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #111214;
-        --surface: #1a1b1d;
-        --text: #f4f4f5;
-        --muted: #aaa59c;
-        --border: #333238;
-        --accent: #e4bc61;
-      }
-    }
-    * { box-sizing: border-box; }
     body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.65;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 24px;
+      color: var(--text);
+      background-color: var(--bg);
     }
-    main {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 56px 24px 80px;
+    h1 {
+      color: var(--heading);
+      font-family: Georgia, serif;
+      font-size: 28px;
+      margin-bottom: 8px;
     }
-    header {
-      padding-bottom: 28px;
-      margin-bottom: 32px;
-      border-bottom: 1px solid var(--border);
+    h2 {
+      color: var(--accent);
+      margin-top: 32px;
+      font-size: 20px;
+      border-bottom: 1px solid #F0EAD6;
+      padding-bottom: 6px;
     }
-    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; margin: 0 0 12px; }
-    h2 { font-size: 1.35rem; margin-top: 36px; margin-bottom: 10px; }
-    h3 { font-size: 1.05rem; margin-top: 24px; margin-bottom: 8px; }
-    p, li { font-size: 1rem; }
-    .meta, .muted { color: var(--muted); }
-    .summary {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 20px;
-      margin: 24px 0 32px;
+    .meta {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 24px;
     }
-    a { color: var(--accent); }
-    code {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 2px 5px;
+    .box {
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      margin: 24px 0;
     }
-    footer {
-      border-top: 1px solid var(--border);
-      margin-top: 48px;
-      padding-top: 24px;
-      color: var(--muted);
-      font-size: 0.95rem;
+    .box h3 {
+      margin-top: 0;
+      color: var(--heading);
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .badge {
+      display: inline-block;
+      background: #E8F5E9;
+      color: var(--clover);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 12px;
     }
   </style>
 </head>
 <body>
-<main>
-  <header>
-    <h1>Privacy Policy</h1>
-    <p><strong>Little Luck</strong></p>
-    <p class="meta">Developer: K2 Labs &nbsp;|&nbsp; Package: <code>com.k2labs.littleluck</code></p>
-    <p class="meta">Last updated: August 20, 2026</p>
-  </header>
-
-  <div class="summary">
-    <strong>Privacy summary:</strong> Little Luck is a personal journal for recording small positive moments. Your journal is stored locally on your device by default. Google sign-in and Firebase cloud sync are optional. If you choose to sign in, your journal entries are synced to Google Firebase so they can be restored and used across your signed-in devices. Little Luck does not contain third-party advertising and does not use the Android Advertising ID.
+  <div class="badge">🍀 Little Luck</div>
+  <h1>Privacy Policy & Data Deletion</h1>
+  <div class="meta">
+    <strong>Effective Date:</strong> August 26, 2026<br>
+    <strong>Developer / Organization:</strong> K2 Labs (Min Kaung Khant)<br>
+    <strong>Package Name:</strong> <code>com.k2labs.littleluck</code>
   </div>
 
-  <h2>1. About this policy</h2>
-  <p>This Privacy Policy explains how Little Luck (the “App”), provided by K2 Labs, accesses, uses, stores, and shares information when you use the App.</p>
+  <h2>1. Overview</h2>
+  <p><strong>Little Luck</strong> is a gentle, local-first gratitude and lucky moments journaling application. Your personal reflections, thoughts, and moments belong solely to you. We do not track, profile, or sell your personal data.</p>
 
-  <h2>2. Information you create in Little Luck</h2>
-  <p>The App allows you to create and manage personal “lucky moments.” A saved moment may contain:</p>
+  <h2>2. Information We Collect and How We Use It</h2>
   <ul>
-    <li>the text you enter for the moment;</li>
-    <li>the date associated with the moment;</li>
-    <li>a category selected in the App;</li>
-    <li>whether the moment is marked as a favorite;</li>
-    <li>an internal identifier and display position; and</li>
-    <li>created and updated timestamps used for storage and synchronization.</li>
-  </ul>
-  <p>The App also stores preferences needed for normal operation, such as your selected appearance or theme.</p>
-
-  <h2>3. Local storage</h2>
-  <p>Your moments and supported App preferences are stored locally on your device. You can use the App without signing in to Google, in which case your journal can remain local to that installation.</p>
-  <p>Local data can generally be removed using the App’s available delete functions, Android app-data controls, or by uninstalling the App. Device or operating-system backup behavior may depend on your Android and Google account backup settings.</p>
-
-  <h2>4. Optional Google sign-in</h2>
-  <p>Google sign-in is optional and is used only when you choose to enable cloud synchronization. Little Luck uses Google Sign-In and Firebase Authentication to authenticate your account.</p>
-  <p>When you sign in, Google and Firebase may provide account information associated with authentication, such as your Firebase user identifier, Google account email address, display name, and other basic account metadata made available by the authentication provider. The App uses this information to identify the signed-in account, display the connected account in the App, and keep cloud data separated by user.</p>
-  <p>Little Luck does not require Google sign-in for local journal use.</p>
-
-  <h2>5. Firebase cloud synchronization</h2>
-  <p>If you choose to sign in with Google, Little Luck uses Google Firebase Cloud Firestore to synchronize your saved moments. Synced journal data is stored under your authenticated Firebase user identifier.</p>
-  <p>Cloud synchronization may upload the journal fields described in Section 2, including the text you enter. When synchronization runs, the App may download your existing cloud moments, merge them with locally stored moments, and upload the resulting current set for your account.</p>
-  <p>Because cloud sync is optional, signing out stops authenticated synchronization but does not by itself delete journal data already stored locally or previously synchronized to Firebase.</p>
-
-  <h2>6. Backup and restore</h2>
-  <p>Little Luck includes a manual JSON backup and restore feature. When you export a backup, the App creates a JSON representation of your saved moments and copies it to your device clipboard so you can save or transfer it yourself.</p>
-  <p>Clipboard contents are controlled by your device operating system. Depending on your device and installed apps, clipboard data may be visible outside Little Luck. Treat exported backups as private because they can contain the journal text you entered.</p>
-  <p>When you import a backup, the backup content is processed by the App and merged into your journal. If you are signed in, imported moments may subsequently be included in Firebase synchronization.</p>
-
-  <h2>7. Internet access</h2>
-  <p>The Android version of Little Luck uses Internet access for Google sign-in and Firebase synchronization. Local journal features can be used without cloud sync, subject to normal App behavior and device availability.</p>
-
-  <h2>8. Third-party services</h2>
-  <p>Little Luck currently integrates the following Google services for optional authentication and cloud synchronization:</p>
-  <ul>
-    <li><strong>Google Sign-In</strong> for user authentication;</li>
-    <li><strong>Firebase Authentication</strong> for account authentication and identity; and</li>
-    <li><strong>Firebase Cloud Firestore</strong> for optional cloud storage and synchronization of journal moments.</li>
-  </ul>
-  <p>Information processed by Google or Firebase is also subject to their applicable terms and privacy practices. You can review Google’s privacy information at <a href="https://policies.google.com/privacy">Google Privacy Policy</a> and Firebase privacy and security information at <a href="https://firebase.google.com/support/privacy">Firebase Privacy and Security</a>.</p>
-
-  <h2>9. Advertising, analytics, and tracking</h2>
-  <p>The current release of Little Luck does not display third-party advertisements, does not use the Android Advertising ID, and does not include third-party advertising SDKs.</p>
-  <p>The current release also does not include a K2 Labs analytics or behavioral-tracking service for profiling your journal activity. If these practices change in a future release, this policy will be updated.</p>
-
-  <h2>10. How information is used</h2>
-  <p>Information handled by the App is used to:</p>
-  <ul>
-    <li>save, display, edit, search, categorize, favorite, and delete your journal moments;</li>
-    <li>calculate local journal features such as streaks and category counts;</li>
-    <li>remember App preferences;</li>
-    <li>authenticate you when you choose Google sign-in;</li>
-    <li>synchronize and restore your moments when optional cloud sync is enabled; and</li>
-    <li>support manual backup and restore.</li>
+    <li><strong>Local Storage (Default):</strong> All notes, categories, and streak counters are stored strictly on your local device.</li>
+    <li><strong>Optional Cloud Sync (Google Sign-In & Firestore):</strong> If you choose to enable Cloud Sync, your Google email address, Firebase User ID (UID), and synchronized moments are securely stored in Google Cloud Firestore.</li>
+    <li><strong>Data Encryption:</strong> All data transmitted between the Little Luck application and cloud servers is encrypted in transit using industry-standard HTTPS / TLS.</li>
   </ul>
 
-  <h2>11. Data sharing and sale</h2>
-  <p>K2 Labs does not sell or rent your personal information or journal content. When you enable Google sign-in and cloud sync, information is processed by Google/Firebase as necessary to provide authentication and synchronization services.</p>
-  <p>K2 Labs may also disclose information if required by applicable law, legal process, or a valid governmental request, or when reasonably necessary to protect users, the App, or legal rights.</p>
+  <h2>3. Account & Data Deletion Instructions</h2>
+  <div class="box">
+    <h3>How to Request Permanent Deletion of Your Account and Data</h3>
+    <p>Users have the right to request the permanent deletion of their account and all associated cloud sync data at any time without restriction:</p>
+    <ul>
+      <li><strong>In-App Deletion:</strong> You can delete any individual moment directly in the app via the three-dots menu on any note card.</li>
+      <li><strong>Full Account & Cloud Data Deletion:</strong> Send an email request to <a href="mailto:minkaungkhant@gmail.com">minkaungkhant@gmail.com</a> with the subject <code>Little Luck - Data Deletion Request</code> and provide your associated Google email address.</li>
+      <li><strong>Processing Time:</strong> Upon receiving your request, all user identifiers, backups, and database records stored in Google Cloud Firestore will be permanently and irreversibly purged within <strong>7 business days</strong>.</li>
+    </ul>
+  </div>
 
-  <h2>12. Data retention and deletion</h2>
-  <h3>Local journal data</h3>
-  <p>You can delete individual moments in the App. Local App data can also be removed through Android app-data controls or by uninstalling Little Luck, subject to any device backup or restore behavior controlled by your operating system or account settings.</p>
+  <h2>4. Third-Party Services</h2>
+  <p>Little Luck integrates with Google Play Services and Firebase Authentication / Firestore solely for optional user authentication and encrypted data backup.</p>
 
-  <h3>Cloud-synced journal data</h3>
-  <p>If you are signed in, deleting a moment in the App also attempts to delete that synchronized moment from your Firebase cloud journal. Temporary network or synchronization failures may delay a cloud deletion until connectivity is available or further action is taken.</p>
-
-  <h3 id="delete-account">Google/Firebase account and cloud-data deletion</h3>
-  <p>Signing out does not delete your Firebase authentication record or all previously synchronized cloud data. To request deletion of your Little Luck Firebase account data and associated synchronized journal data, email <a href="mailto:k2lab.play@gmail.com?subject=Little%20Luck%20Account%20Deletion%20Request">k2lab.play@gmail.com</a> with the subject <strong>Little Luck Account Deletion Request</strong> and identify the Google account email used with Little Luck. K2 Labs may need to verify the request before deleting associated Firebase authentication and Firestore data.</p>
-  <p>Deleting cloud account data does not automatically erase copies you exported yourself or local data remaining on devices that are offline or no longer connected to that account. You can remove those local copies using the methods described above.</p>
-
-  <h2>13. Security</h2>
-  <p>Little Luck relies on Android application sandboxing, Firebase security mechanisms, authenticated user scoping, and encrypted network transport provided by the underlying platform and services. No method of electronic storage or transmission can be guaranteed to be completely secure, so you should avoid placing information in the journal that you do not want stored on your device or, when sync is enabled, in your Firebase cloud account.</p>
-
-  <h2>14. Children’s privacy</h2>
-  <p>Little Luck is not directed to children under 13. K2 Labs does not knowingly collect personal information from children under 13 through the App. If you believe a child has provided personal information through Little Luck, contact K2 Labs so the matter can be reviewed and appropriate deletion steps can be taken.</p>
-
-  <h2>15. International processing</h2>
-  <p>If you enable Google sign-in or Firebase synchronization, information may be processed on infrastructure operated by Google and its service providers in countries other than the country where you live, subject to Google’s applicable data-protection practices and legal safeguards.</p>
-
-  <h2>16. Changes to this Privacy Policy</h2>
-  <p>This policy may be updated when Little Luck’s features, data practices, third-party services, permissions, or legal requirements change. The “Last updated” date at the top of this page will be revised when material changes are published.</p>
-
-  <h2>17. Contact</h2>
-  <p>If you have questions about this Privacy Policy, Little Luck’s privacy practices, or a data-deletion request, contact:</p>
-  <p><strong>K2 Labs</strong><br>
-     Email: <a href="mailto:k2lab.play@gmail.com">k2lab.play@gmail.com</a></p>
-
-  <footer>
-    <p>This Privacy Policy applies to Little Luck, package <code>com.k2labs.littleluck</code>.</p>
-  </footer>
-</main>
+  <h2>5. Contact Us</h2>
+  <p>If you have any questions or feedback regarding this policy, please reach out directly at <a href="mailto:minkaungkhant@gmail.com">minkaungkhant@gmail.com</a>.</p>
 </body>
 </html>
