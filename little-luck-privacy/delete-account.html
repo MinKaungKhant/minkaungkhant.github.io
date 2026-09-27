@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account & Data Deletion — Little Luck</title>
+  <meta name="description" content="Official instructions for deleting your Little Luck account and all associated cloud data, both in-app and via email request.">
+  <style>
+    :root {
+      --bg: #FFFDF9;
+      --card-bg: #FFF7E8;
+      --card-border: #FFE58F;
+      --text: #2C2825;
+      --heading: #1E1B17;
+      --accent: #D48806;
+      --clover: #2E7D32;
+      --danger: #D32F2F;
+      --danger-bg: #FFEBEE;
+      --danger-border: #FFCDD2;
+      --code-bg: #F4EEDD;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 24px;
+      color: var(--text);
+      background-color: var(--bg);
+    }
+    h1 {
+      color: var(--heading);
+      font-family: Georgia, serif;
+      font-size: 30px;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    h2 {
+      color: var(--accent);
+      margin-top: 36px;
+      font-size: 21px;
+      border-bottom: 1px solid #F0EAD6;
+      padding-bottom: 6px;
+    }
+    h3 {
+      color: var(--heading);
+      font-size: 17px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+    .meta {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 24px;
+      background: #FAF7EE;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid #EFE8D8;
+    }
+    .badge {
+      display: inline-block;
+      background: #E8F5E9;
+      color: var(--clover);
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    .nav-links {
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .box {
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      margin: 20px 0;
+    }
+    .box-danger {
+      background: var(--danger-bg);
+      border: 1px solid var(--danger-border);
+    }
+    .box-danger h3 {
+      color: var(--danger);
+    }
+    ol, ul {
+      padding-left: 22px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+      background-color: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13.5px;
+    }
+    a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 14.5px;
+    }
+    .data-table th, .data-table td {
+      border: 1px solid #EAE0C8;
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .data-table th {
+      background-color: #F8F3E6;
+      color: var(--heading);
+      font-weight: 600;
+    }
+    .tag-deleted {
+      display: inline-block;
+      background-color: #FFEBEE;
+      color: #C62828;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .tag-none {
+      display: inline-block;
+      background-color: #E8F5E9;
+      color: #2E7D32;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    footer {
+      margin-top: 48px;
+      padding-top: 18px;
+      border-top: 1px solid #EFE8D8;
+      font-size: 13px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-links">
+    <a href="./index.html">← Little Luck Privacy Policy</a>
+  </div>
+
+  <div class="badge">🍀 Little Luck</div>
+  <h1>Account & Data Deletion</h1>
+
+  <div class="meta">
+    <strong>Application:</strong> Little Luck (Gratitude & Lucky Moments Journal)<br>
+    <strong>Package Name:</strong> <code>com.k2labs.littleluck</code><br>
+    <strong>Developer / Organization:</strong> K2 Labs (Min Kaung Khant)<br>
+    <strong>Support & Deletion Contact:</strong> <a href="mailto:minkaungkhant@gmail.com">minkaungkhant@gmail.com</a><br>
+    <strong>Last Updated:</strong> September 27, 2026
+  </div>
+
+  <h2>1. Overview & Policy Commitment</h2>
+  <p>
+    <strong>Little Luck</strong> is committed to user privacy, transparent data ownership, and strict data minimization.
+    By default, all journal moments are stored strictly on your local device. If you chose to sign in with your Google account to enable optional Cloud Sync, your cloud journal is stored in Google Cloud Firestore and protected by strict per-user authentication rules.
+  </p>
+  <p>
+    You have the unconditional right to delete your cloud account and all associated personal data at any time. We provide two ways to request permanent deletion:
+  </p>
+  <ul>
+    <li><strong>Method 1: Instant In-App Deletion</strong> (Immediate, self-service via the app)</li>
+    <li><strong>Method 2: Email Deletion Request</strong> (If you uninstalled the app or lost device access)</li>
+  </ul>
+
+  <h2>2. Method 1: In-App Self-Service Deletion (Immediate)</h2>
+  <p>You can permanently delete your account, authentication record, and cloud database entries directly from within the Little Luck application:</p>
+
+  <div class="box">
+    <h3>Step-by-Step In-App Instructions</h3>
+    <ol>
+      <li>Open the <strong>Little Luck</strong> app on your Android device.</li>
+      <li>Tap the <strong>Me & Settings</strong> tab in the bottom navigation bar.</li>
+      <li>Verify that you are signed in with the Google account you wish to delete (under the <strong>Account & Sync</strong> section).</li>
+      <li>Scroll down to the <strong>Data Management</strong> section.</li>
+      <li><em>(Optional)</em> If you would like to keep a personal offline copy of your journal moments before deletion, tap <strong>Export Backup (JSON)</strong> to copy your memories to your clipboard or file manager.</li>
+      <li>Tap <strong>Delete Account & Cloud Data</strong>.</li>
+      <li>A confirmation modal titled <em>"Delete Account & Cloud Data?"</em> will display a summary of the action. Review the warning and tap <strong>Delete Permanently</strong>.</li>
+      <li>
+        <strong>Security Reauthentication:</strong> If your session has expired or Firebase requires recent credentials, Google Play Services will automatically display a Google Sign-In prompt to verify account ownership.
+      </li>
+    </ol>
+  </div>
+
+  <div class="box box-danger">
+    <h3>What Happens When You Confirm In-App Deletion</h3>
+    <ul>
+      <li><strong>Immediate Cloud Purge:</strong> All lucky moments and journal entries stored in Cloud Firestore under your unique User ID (<code>users/{uid}/moments/*</code>) are permanently deleted.</li>
+      <li><strong>User Profile Deletion:</strong> The parent user document in Cloud Firestore (<code>users/{uid}</code>) is permanently deleted.</li>
+      <li><strong>Auth Account Deletion:</strong> Your Firebase Authentication user account and credentials are permanently destroyed.</li>
+      <li><strong>Local Cache Purge:</strong> All cached moments and sync tokens linked to your account are erased from device storage.</li>
+      <li><strong>Safe Offline Reversion:</strong> The app immediately resets to a clean, isolated offline journal session. Any purely local, device-only moments you created before signing in remain safely on your physical device.</li>
+    </ul>
+  </div>
+
+  <h2>3. Method 2: Request Deletion via Email (Web Request)</h2>
+  <p>
+    If you have uninstalled Little Luck, no longer have access to the mobile device, or cannot log in, you can submit a manual deletion request via email.
+  </p>
+
+  <div class="box">
+    <h3>How to Submit an Email Deletion Request</h3>
+    <ol>
+      <li>
+        Send an email to: <a href="mailto:minkaungkhant@gmail.com?subject=Little%20Luck%20-%20Account%20and%20Data%20Deletion%20Request"><strong>minkaungkhant@gmail.com</strong></a>
+      </li>
+      <li>
+        <strong>Email Subject:</strong> <code>Little Luck - Account & Data Deletion Request</code>
+      </li>
+      <li>
+        <strong>Required Information:</strong>
+        <ul>
+          <li>The <strong>Google Account email address</strong> you used to sign in to Little Luck.</li>
+          <li>A brief statement requesting permanent deletion: <em>"Please permanently delete my Little Luck account and all associated cloud data."</em></li>
+        </ul>
+      </li>
+      <li>
+        <strong>Verification & Processing Timeline:</strong>
+        <ul>
+          <li>We will verify account ownership (e.g., verifying that the request originates from the registered Google email address).</li>
+          <li>Once verified, all Cloud Firestore documents and the Firebase Authentication record will be permanently purged within <strong>7 business days</strong>.</li>
+          <li>A confirmation email will be sent back to you once the deletion process is complete.</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h2>4. Data Retention & Deletion Scope</h2>
+  <p>The table below summarizes exactly what data is deleted and what, if anything, is retained upon account deletion:</p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 25%;">Data Category</th>
+        <th style="width: 45%;">Description</th>
+        <th style="width: 30%;">Deletion Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Journal Moments</strong></td>
+        <td>Moment text, categories (Good Luck, Kindness, Achievement), favorite flags, creation and modification timestamps stored in Cloud Firestore.</td>
+        <td><span class="tag-deleted">Permanently Deleted</span><br>Purged immediately in-app or within 7 business days via email.</td>
+      </tr>
+      <tr>
+        <td><strong>User Profile Document</strong></td>
+        <td>Firestore document at <code>users/{uid}</code> storing account sync metadata.</td>
+        <td><span class="tag-deleted">Permanently Deleted</span><br>Purged immediately in-app or within 7 business days via email.</td>
+      </tr>
+      <tr>
+        <td><strong>Authentication Record</strong></td>
+        <td>Firebase Authentication user ID (UID), associated Google email address, and OAuth tokens.</td>
+        <td><span class="tag-deleted">Permanently Deleted</span><br>Deleted from Firebase Authentication system.</td>
+      </tr>
+      <tr>
+        <td><strong>Local Device Cache</strong></td>
+        <td>Locally stored copy of synchronized moments in app's private SharedPreferences storage.</td>
+        <td><span class="tag-deleted">Purged on Device</span><br>Erased immediately during in-app deletion, or upon app uninstall.</td>
+      </tr>
+      <tr>
+        <td><strong>Third-Party Data</strong></td>
+        <td>Ad identifiers, analytics cookies, tracking profiles, behavioral telemetries.</td>
+        <td><span class="tag-none">None Collected</span><br>Little Luck does not use advertising or analytics tracking SDKs.</td>
+      </tr>
+      <tr>
+        <td><strong>Retained Cloud Data</strong></td>
+        <td>Any secondary copies, archives, or backups stored on remote servers.</td>
+        <td><span class="tag-none">None Retained</span><br>No cloud data is retained after deletion.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Offline Device-Only Data Note</h3>
+  <p>
+    If you used Little Luck without signing in (or before signing in), notes created in offline mode reside exclusively on your physical device. Little Luck never transmits offline notes to the cloud without your explicit sign-in and sync. You can wipe all offline data anytime directly in the app via <strong>Me & Settings -> Data Management -> Clear All Moments</strong>, or by navigating to Android <strong>Settings -> Apps -> Little Luck -> Storage & Cache -> Clear Storage</strong>, or by uninstalling the application.
+  </p>
+
+  <h2>5. Security & Technical Safeguards</h2>
+  <ul>
+    <li><strong>Reauthentication Guard:</strong> To prevent unauthorized deletion of accounts, Firebase sensitive operations require reauthentication if your session is stale.</li>
+    <li><strong>Transactional Batch Purging:</strong> Cloud deletion operations are batched to guarantee that all moments and parent documents are removed cleanly without leaving orphaned records.</li>
+    <li><strong>Zero Tracking:</strong> Little Luck does not share data with data brokers, advertisers, or third parties.</li>
+  </ul>
+
+  <h2>6. Developer Contact & Support</h2>
+  <p>
+    For any questions, privacy inquiries, or assistance with account deletion:
+  </p>
+  <ul>
+    <li><strong>Developer:</strong> Min Kaung Khant / K2 Labs</li>
+    <li><strong>Email:</strong> <a href="mailto:minkaungkhant@gmail.com">minkaungkhant@gmail.com</a></li>
+    <li><strong>Privacy Policy:</strong> <a href="./index.html">https://minkaungkhant.github.io/little-luck-privacy/</a></li>
+    <li><strong>Source Code & Project Repository:</strong> <a href="https://github.com/MinKaungKhant/little-luck">https://github.com/MinKaungKhant/little-luck</a></li>
+  </ul>
+
+  <footer>
+    <p>Little Luck &bull; Package: <code>com.k2labs.littleluck</code> &bull; &copy; 2026 K2 Labs. All rights reserved.</p>
+  </footer>
+</body>
+</html>
